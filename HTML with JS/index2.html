@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My New Document</title>
+    <script>
+        // JavaScript function that changes the content of the paragraph
+        function changeText() {
+            document.getElementById("myParagraph").innerHTML = "The text has been changed!";
+        }
+    </script>
+</head>
+<body>
+    <div id="student-info">
+        <h2>What can JavaScript do?</h2>
+        <br/>
+
+        <p id="demo">JavaScript can change HTML content</p>
+
+        <button 
+            type="button" 
+            onclick='document.getElementById("demo")
+                .innerHTML = "Here is my changed content"'
+        >
+            Click me!
+        </button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to jQuery Manipulation!</h1>
+    <p id="textElement">This is a paragraph to change the text color with jQuery.</p>
+    <button id="changeColor">Change Text Color</button>
+
+    <img id="toggleImage" src="sampleimage.jpg" alt="Sample Image">
+    <button id="toggleVisibility">Toggle Image Visibility</button>
+
+    <script>
+        $(document).ready(function() {
+            // Change the color of the text in the paragraph
+            $('#changeColor').click(function() {
+                $('#textElement').css('color', 'blue');
+                $('#textElement').css('position', 'relative');
+                $('#textElement').css('top', '60px');
+            });
+
+            // Toggle the visibility of the image
+            $('#toggleVisibility').click(function() {
+                $('#toggleImage').toggleClass('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
