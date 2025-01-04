@@ -31,8 +31,6 @@ import ws.schild.jave.encode.EncodingAttributes;
 import ws.schild.jave.encode.VideoAttributes;
 import ws.schild.jave.info.VideoSize;
 
-
-
 public class MMConverterInterface extends JFrame {
 	
 	private JLabel sourceFileLabel;
@@ -45,8 +43,6 @@ public class MMConverterInterface extends JFrame {
 	 * Create the frame.
 	 */
 	public MMConverterInterface() {
-		
-		
 		
 		setTitle("Multimedia Converter\r\n");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -304,6 +300,27 @@ public class MMConverterInterface extends JFrame {
 
 		
 		 try {
+			 	
+			 // Generate intermediate MPEGTS file
+		        File intermediateFile = new File(target.getParent(), target.getName().replace(".m2ts", ".mpegts"));
+			 
+			 	// Extract source video properties
+		        MultimediaObject multimediaObject = new MultimediaObject(source);
+		        int sourceWidth = multimediaObject.getInfo().getVideo().getSize().getWidth();
+		        int sourceHeight = multimediaObject.getInfo().getVideo().getSize().getHeight();
+		        double aspectRatio = (double) sourceWidth / sourceHeight;
+		        
+		        System.out.println("Source resolution: " + sourceWidth + "x" + sourceHeight);
+		        System.out.println("Aspect Ratio: " + aspectRatio);
+
+		        // Adjust the resolution to ensure compliance with AVCHD standards
+		        int targetWidth = 1920; // Default width
+		        int targetHeight = (int) (targetWidth / aspectRatio); // Calculate height dynamically
+
+		        if (targetHeight % 2 != 0) {
+		            targetHeight++; // Ensure height is divisible by 2
+		        }
+		        
 	            // Set up audio attributes
 	            AudioAttributes audio = new AudioAttributes();
 	            audio.setCodec("ac3"); // AVCHD typically uses AC-3 audio codec
@@ -327,6 +344,9 @@ public class MMConverterInterface extends JFrame {
 	            // Perform the conversion
 	            Encoder encoder = new Encoder();
 	            encoder.encode(new MultimediaObject(source), target, attrs);
+	            
+	         // Convert MPEGTS to MTS using FFmpeg
+	            FFmpegService.convertToMTS(intermediateFile, target);
 
 	            JOptionPane.showMessageDialog(null, "MOV to AVCHD conversion successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
 	            

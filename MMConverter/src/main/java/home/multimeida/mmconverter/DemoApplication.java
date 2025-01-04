@@ -11,6 +11,7 @@ import home.multimeida.mmconverter.MMConverterInterface;
 public class DemoApplication {
 
 	 public static void main(String[] args) {
+		
 	        // Disable headless mode
 	        System.setProperty("java.awt.headless", "false");
 
