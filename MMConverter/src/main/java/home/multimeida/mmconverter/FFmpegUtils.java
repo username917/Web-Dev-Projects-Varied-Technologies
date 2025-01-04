@@ -7,10 +7,13 @@ import java.io.InputStream;
 
 public class FFmpegUtils {
 	
+	private static final String FFMPEG_BINARY_NAME = "ffmpeg";
+	
 	public static String extractFFmpegBinary() throws IOException {
         // Determine the operating system
         String os = System.getProperty("os.name").toLowerCase();
         String ffmpegExecutable;
+        String ffmpegResourcePath = "ffmpeg";
 
         if (os.contains("win")) {
             ffmpegExecutable = "ffmpeg/ffmpeg.exe"; // Windows
@@ -19,26 +22,28 @@ public class FFmpegUtils {
         } else {
             ffmpegExecutable = "ffmpeg/ffmpeg"; // Linux
         }
+        
+     // Extract binary to a temp file
+        File tempBinary = new File(System.getProperty("java.io.tmpdir"), FFMPEG_BINARY_NAME);
 
-        // Extract FFmpeg binary from resources to a temporary directory
-        InputStream ffmpegStream = FFmpegUtils.class.getClassLoader().getResourceAsStream(ffmpegExecutable);
-        if (ffmpegStream == null) {
-            throw new FileNotFoundException("FFmpeg binary not found in resources!");
-        }
+        if (!tempBinary.exists()) {
+            try (InputStream inputStream = FFmpegUtils.class.getClassLoader().getResourceAsStream(ffmpegResourcePath);
+                 FileOutputStream outputStream = new FileOutputStream(tempBinary)) {
 
-        File tempFFmpegFile = new File(System.getProperty("java.io.tmpdir"), "ffmpeg");
-        try (FileOutputStream outputStream = new FileOutputStream(tempFFmpegFile)) {
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = ffmpegStream.read(buffer)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);
+                if (inputStream == null) {
+                    throw new FileNotFoundException("FFmpeg binary not found in resources.");
+                }
+
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+                tempBinary.setExecutable(true);
             }
         }
 
-        // Make the file executable
-        tempFFmpegFile.setExecutable(true);
-
-        return tempFFmpegFile.getAbsolutePath();
+        return tempBinary.getAbsolutePath();
     }
 
 }

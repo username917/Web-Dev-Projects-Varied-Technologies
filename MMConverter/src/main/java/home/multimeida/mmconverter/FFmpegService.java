@@ -6,9 +6,18 @@ import java.io.InputStreamReader;
 
 public class FFmpegService {
 	
-	public static void convertToMTS(File input, File output) {
+	public static void convertToMTS(File input) {
         try {
+        	
+        	String outputPath = input.getAbsolutePath().replace(".mpegts", ".mts");
+            File output = new File(outputPath);
+            
             String ffmpegPath = FFmpegUtils.extractFFmpegBinary();
+            
+            // Notify user about the process start
+            System.out.println("Starting conversion to MTS...");
+            System.out.println("Input file: " + input.getAbsolutePath());
+            System.out.println("Output file: " + output.getAbsolutePath());
 
             // Build FFmpeg command
             ProcessBuilder processBuilder = new ProcessBuilder(

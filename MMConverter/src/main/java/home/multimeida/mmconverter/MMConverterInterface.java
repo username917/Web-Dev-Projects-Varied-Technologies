@@ -346,7 +346,7 @@ public class MMConverterInterface extends JFrame {
 	            encoder.encode(new MultimediaObject(source), target, attrs);
 	            
 	         // Convert MPEGTS to MTS using FFmpeg
-	            FFmpegService.convertToMTS(intermediateFile, target);
+	            FFmpegService.convertToMTS(intermediateFile);
 
 	            JOptionPane.showMessageDialog(null, "MOV to AVCHD conversion successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
 	            
