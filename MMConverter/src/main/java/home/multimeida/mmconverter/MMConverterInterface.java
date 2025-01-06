@@ -298,7 +298,10 @@ public class MMConverterInterface extends JFrame {
 		
 		System.out.println("Source is: " + source.getAbsolutePath() + " and target is: " + target.getAbsolutePath());
 
+		// trying bypassing the mpegts stage
 		
+		FFmpegService.convertToMTS(source, target);
+		/*
 		 try {
 			 	
 			 // Generate intermediate MPEGTS file
@@ -317,8 +320,14 @@ public class MMConverterInterface extends JFrame {
 		        int targetWidth = 1920; // Default width
 		        int targetHeight = (int) (targetWidth / aspectRatio); // Calculate height dynamically
 
-		        if (targetHeight % 2 != 0) {
-		            targetHeight++; // Ensure height is divisible by 2
+		        if (targetHeight > 1080) {
+		            targetHeight = 1080;
+		            targetWidth = (int) (targetHeight * aspectRatio);
+
+		            // Ensure width is divisible by 2
+		            if (targetWidth % 2 != 0) {
+		                targetWidth++;
+		            }
 		        }
 		        
 	            // Set up audio attributes
@@ -332,8 +341,8 @@ public class MMConverterInterface extends JFrame {
 	            VideoAttributes video = new VideoAttributes();
 	            video.setCodec("h264"); // AVCHD uses MPEG-2 video codec "mpeg2video"
 	            video.setBitRate(15000000); // 15 Mbps
-	            video.setFrameRate(30); //(29.97); // Standard frame rate for AVCHD
-	            video.setSize(new VideoSize(1920, 1080)); // Full HD resolution
+	            video.setSize(new VideoSize(targetWidth, targetHeight)); // Dynamically calculated resolution
+	           
 
 	            // Set up encoding attributes
 	            EncodingAttributes attrs = new EncodingAttributes();
@@ -355,8 +364,12 @@ public class MMConverterInterface extends JFrame {
 	            
 	        } catch (EncoderException e) {
 	            e.printStackTrace();
-	            JOptionPane.showMessageDialog(null, "Conversion failed: " + e.getMessage(), "Conversion Error", JOptionPane.ERROR_MESSAGE);	        }
+	            JOptionPane.showMessageDialog(null, "Conversion failed: " + e.getMessage(), "Conversion Error", JOptionPane.ERROR_MESSAGE);	        
+	        }
+	        
+	        */
 	}
+	
 	
 	
 }
