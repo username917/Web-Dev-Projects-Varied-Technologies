@@ -194,7 +194,20 @@ public class MMConverterInterface extends JFrame {
 			        
 			        System.out.println("Destination ile is: " + destinationFile);
 			        
-			        convertMovToAvchdWithJave(sourceFile, destinationFile);
+			        try {
+			            FFmpegService convertMOV = new FFmpegService();
+			            convertMOV.convertToMTS(sourceFile, destinationFile);
+			            
+			            sourceFileLabel.setText("Next file...");
+			            destinationFolderLabel.setText("Next destination...");
+
+			            // If no exceptions, show success message
+			            JOptionPane.showMessageDialog(null, "Conversion completed successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+			        } catch (Exception err) {
+			            // Show error message on failure
+			            JOptionPane.showMessageDialog(null, "Conversion failed: " + err.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+			            err.printStackTrace();
+			        }
 			        
 			        
 			    } else {
@@ -293,15 +306,12 @@ public class MMConverterInterface extends JFrame {
 		
 		}
 	
-	private void convertMovToAvchdWithJave(File source, File target) {
+	private void convertMovToMPEGTSWithJave(File source, File target) {
 		// TODO Auto-generated method stub
 		
 		System.out.println("Source is: " + source.getAbsolutePath() + " and target is: " + target.getAbsolutePath());
 
-		// trying bypassing the mpegts stage
 		
-		FFmpegService.convertToMTS(source, target);
-		/*
 		 try {
 			 	
 			 // Generate intermediate MPEGTS file
@@ -353,9 +363,6 @@ public class MMConverterInterface extends JFrame {
 	            // Perform the conversion
 	            Encoder encoder = new Encoder();
 	            encoder.encode(new MultimediaObject(source), target, attrs);
-	            
-	         // Convert MPEGTS to MTS using FFmpeg
-	            FFmpegService.convertToMTS(intermediateFile);
 
 	            JOptionPane.showMessageDialog(null, "MOV to AVCHD conversion successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
 	            
@@ -366,11 +373,13 @@ public class MMConverterInterface extends JFrame {
 	            e.printStackTrace();
 	            JOptionPane.showMessageDialog(null, "Conversion failed: " + e.getMessage(), "Conversion Error", JOptionPane.ERROR_MESSAGE);	        
 	        }
-	        
-	        */
 	}
-	
-	
-	
 }
+	        
+	
+	
+	
+	
+	
+
 

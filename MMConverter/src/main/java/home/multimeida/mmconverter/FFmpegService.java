@@ -2,107 +2,78 @@ package home.multimeida.mmconverter;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class FFmpegService {
 	
-	public static void convertToMTS(File input, File target) {
+	public void convertToMTS(File input, File target) {
 	    try {
-	        // Generate output path with the current date appended to the filename
 	        String currentDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
 	        String outputPath = target.getParent() + File.separator + input.getName().replaceFirst("\\.[^.]+$", "_" + currentDate + ".mts");
 
 	        File output = new File(outputPath);
 
-	        // Notify user about the process start
 	        System.out.println("Starting conversion to MTS...");
 	        System.out.println("Input file: " + input.getAbsolutePath());
 	        System.out.println("Output file: " + output.getAbsolutePath());
 
 	        String ffmpegPath = FFmpegUtils.extractFFmpegBinary();
 
-	        // Retrieve video dimensions
 	        String[] dimensions = getVideoDimensions(input, ffmpegPath);
-
-	        if (dimensions == null) {
-	            throw new Exception("Unable to retrieve video dimensions from the source file.");
-	        }
+	        if (dimensions == null) throw new Exception("Unable to retrieve video dimensions.");
 
 	        int width = Integer.parseInt(dimensions[0]);
 	        int height = Integer.parseInt(dimensions[1]);
 	        double aspectRatio = (double) width / height;
 
-	        // Target dimensions
-	        int targetWidth = 1920;
-	        int targetHeight = 1080;
-
-	        String scaleFilter;
-
-	        if (width > targetWidth || height > targetHeight) {
-	            // Scale to fit within 1920x1080 while maintaining aspect ratio
-	            if (aspectRatio > 1) { // Landscape
-	                scaleFilter = "scale=1920:-2"; // Fit width, adjust height (divisible by 2)
-	            } else { // Portrait or square
-	                scaleFilter = "scale=-2:1080"; // Fit height, adjust width (divisible by 2)
-	            }
-	        } else {
-	            // No scaling needed, just pad to fit 1920x1080
-	            scaleFilter = "scale=" + width + ":" + height;
-	        }
-
-	        // Add padding to ensure output is exactly 1920x1080
+	        String scaleFilter = (aspectRatio > 16.0 / 9.0) ? "scale=1920:-2" : "scale=-2:1080";
 	        String padFilter = "pad=1920:1080:(ow-iw)/2:(oh-ih)/2";
 	        String videoFilter = scaleFilter + "," + padFilter;
 
-	        // Build FFmpeg command with scaling and padding filter
 	        ProcessBuilder processBuilder = new ProcessBuilder(
 	            ffmpegPath,
 	            "-i", input.getAbsolutePath(),
-	            "-vf", videoFilter, // Video filter for scaling and padding
-	            "-c:v", "libx264", // H.264 codec for video
-	            "-preset", "fast", // Encoding preset for faster processing
-	            "-c:a", "ac3", // AC3 codec for audio
-	            "-b:a", "192k", // Audio bitrate
-	            "-bsf:v", "h264_mp4toannexb", // Annex B formatting
-	            "-f", "mpegts", // MTS/M2TS format
+	            "-vf", videoFilter,
+	            "-c:v", "libx264",
+	            "-preset", "fast",
+	            "-c:a", "ac3",
+	            "-b:a", "192k",
+	            "-bsf:v", "h264_mp4toannexb",
+	            "-f", "mpegts",
 	            output.getAbsolutePath()
 	        );
 
-	        // Redirect error stream
 	        processBuilder.redirectErrorStream(true);
 
-	        // Start process
 	        Process process = processBuilder.start();
-	        
-	        //testing changes
-
-	        // Capture output (for debugging)
 	        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
 	            String line;
-	            while ((line = reader.readLine()) != null) {
-	                System.out.println(line);
-	            }
+	            while ((line = reader.readLine()) != null) System.out.println(line);
+	        }
+	        
+	        boolean completed = process.waitFor(60, TimeUnit.SECONDS); // Wait for up to 60 seconds
+	        if (!completed) {
+	            process.destroy(); // Force terminate the process
+	            throw new RuntimeException("FFmpeg process timed out.");
+	        }
+	        
+	        int exitCode = process.waitFor();
+	        if (exitCode != 0) {
+	            System.err.println("FFmpeg failed with exit code: " + exitCode);
+	            return; // Exit the function
 	        }
 
-	        // Wait for process to complete
-	        int exitCode = process.waitFor();
-	        if (exitCode == 0) {
-	            System.out.println("Conversion to MTS completed successfully!");
-	            
-	            input = new File(output.getAbsoluteFile().toString());
-	            output = new File("E:/fixedfile.mts");
-	            fixAspectRatioAndRotation(input, output);
-	            
-	        } else {
-	            System.err.println("Conversion failed with exit code: " + exitCode);
-	        }
+	       
 
 	    } catch (Exception e) {
-	    	 e.printStackTrace();
+	        e.printStackTrace();
 	    }
 	}
+
 	 private static String[] getVideoDimensions(File input, String ffmpegPath) {
 	        try {
 	            ProcessBuilder processBuilder = new ProcessBuilder(
@@ -139,6 +110,13 @@ public class FFmpegService {
 		        // Define scaling and padding filters for portrait video
 		        String videoFilter = "scale=ih*9/16:ih,pad=1920:1080:(ow-iw)/2:(oh-ih)/2";
 
+		        System.out.println("Starting aspect ratio and rotation fix...");
+		        System.out.println("FFmpeg Path: " + ffmpegPath);
+		        System.out.println("Input File: " + input.getAbsolutePath());
+		        System.out.println("Output File: " + output.getAbsolutePath());
+		        System.out.println("Input file exists: " + input.exists());
+		        System.out.println("Output file exists (before process): " + output.exists());
+
 		        // Build FFmpeg command
 		        ProcessBuilder processBuilder = new ProcessBuilder(
 		            ffmpegPath,
@@ -151,32 +129,62 @@ public class FFmpegService {
 		            output.getAbsolutePath()
 		        );
 
-		        // Redirect error stream
 		        processBuilder.redirectErrorStream(true);
 
 		        // Start the process
 		        Process process = processBuilder.start();
 
 		        // Capture output (for debugging)
-		        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
-		            String line;
-		            while ((line = reader.readLine()) != null) {
-		                System.out.println(line);
+		        Thread outputThread = new Thread(() -> {
+		            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+		                String line;
+		                while ((line = reader.readLine()) != null) {
+		                    System.out.println("[FFmpeg Output] " + line);
+		                }
+		            } catch (IOException e) {
+		                e.printStackTrace();
 		            }
+		        });
+
+		        Thread errorThread = new Thread(() -> {
+		            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getErrorStream()))) {
+		                String line;
+		                while ((line = reader.readLine()) != null) {
+		                    System.err.println("[FFmpeg Error] " + line);
+		                }
+		            } catch (IOException e) {
+		                e.printStackTrace();
+		            }
+		        });
+
+		        outputThread.start();
+		        errorThread.start();
+
+		        // Wait for threads and process to complete
+		        outputThread.join();
+		        errorThread.join();
+		        
+		        boolean completed = process.waitFor(60, TimeUnit.SECONDS); // Wait for up to 60 seconds
+		        if (!completed) {
+		            process.destroy(); // Force terminate the process
+		            throw new RuntimeException("FFmpeg process timed out.");
 		        }
 
-		        // Wait for the process to complete
+		      
 		        int exitCode = process.waitFor();
-		        if (exitCode == 0) {
-		            System.out.println("Aspect ratio fixed and black borders added successfully!");
-		        } else {
-		            System.err.println("Failed to fix aspect ratio with exit code: " + exitCode);
+		        if (exitCode != 0) {
+		            System.err.println("FFmpeg failed with exit code: " + exitCode);
+		            return; // Exit the function
 		        }
+
+
 
 		    } catch (Exception e) {
+		        System.err.println("Exception during aspect ratio fix:");
 		        e.printStackTrace();
 		    }
 		}
+
 
 
 }
