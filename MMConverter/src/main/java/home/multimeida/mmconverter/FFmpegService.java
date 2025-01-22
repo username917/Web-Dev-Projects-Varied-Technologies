@@ -34,6 +34,7 @@ public class FFmpegService {
 	        String padFilter = "pad=1920:1080:(ow-iw)/2:(oh-ih)/2";
 	        String videoFilter = scaleFilter + "," + padFilter;
 
+	        /*
 	        ProcessBuilder processBuilder = new ProcessBuilder(
 	            ffmpegPath,
 	            "-i", input.getAbsolutePath(),
@@ -42,6 +43,26 @@ public class FFmpegService {
 	            "-preset", "fast",
 	            "-c:a", "ac3",
 	            "-b:a", "192k",
+	            "-bsf:v", "h264_mp4toannexb",
+	            "-f", "mpegts",
+	            output.getAbsolutePath()
+	        );
+	        
+	        */
+	        
+	        // Build FFmpeg command
+	        ProcessBuilder processBuilder = new ProcessBuilder(
+	            ffmpegPath,
+	            "-i", input.getAbsolutePath(),
+	            "-vf", videoFilter,
+	            "-c:v", "libx264",
+	            "-preset", "fast",
+	            "-b:v", "15M", // Set video bitrate to 15 Mbps
+	            "-r", "29.97", // Set frame rate to 29.97 fps
+	            "-c:a", "ac3",
+	            "-b:a", "256k", // Set audio bitrate to 256 kbps
+	            "-ar", "48000", // Set audio sample rate to 48 kHz
+	            "-ac", "2", // Set audio channels to stereo
 	            "-bsf:v", "h264_mp4toannexb",
 	            "-f", "mpegts",
 	            output.getAbsolutePath()
