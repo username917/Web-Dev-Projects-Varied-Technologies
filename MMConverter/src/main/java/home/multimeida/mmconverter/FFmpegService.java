@@ -50,6 +50,7 @@ public class FFmpegService {
 	        
 	        */
 	        
+	        /*
 	        // Build FFmpeg command
 	        ProcessBuilder processBuilder = new ProcessBuilder(
 	            ffmpegPath,
@@ -67,14 +68,56 @@ public class FFmpegService {
 	            "-f", "mpegts",
 	            output.getAbsolutePath()
 	        );
+	        */
+	        
+	        // Build FFmpeg command with AVCHD-compliant settings
+	        ProcessBuilder processBuilder = new ProcessBuilder(
+	            ffmpegPath,
+	            "-i", input.getAbsolutePath(),
+	            "-vf", videoFilter, // Scale and pad filter
+	            "-c:v", "libx264", // Use x264 codec
+	            "-preset", "fast", // Set encoding speed
+	            "-b:v", "15M", // Set video bitrate to 15 Mbps (consistent with AVCHD standard)
+	            "-r", "29.97", // Set frame rate to 29.97 fps (AVCHD standard)
+	            "-flags", "+ilme+ildct", // Enforce interlaced video encoding
+	            "-x264opts", "keyint=15:min-keyint=15:ref=2", // Short GOP structure for AVCHD
+	            "-c:a", "ac3", // Use AC-3 codec for audio
+	            "-b:a", "256k", // Set audio bitrate to 256 kbps
+	            "-ar", "48000", // Set audio sample rate to 48 kHz
+	            "-ac", "2", // Set audio channels to stereo
+	            "-metadata", "service_provider=Canon", // Mimic Canon metadata
+	            "-metadata", "service_name=Canon AVCHD", // Mimic Canon metadata
+	            "-bsf:v", "h264_mp4toannexb", // Convert H.264 bitstream to Annex B format
+	            "-f", "mpegts", // Output as MPEG-TS format
+	            output.getAbsolutePath() // Output file path
+	        );
+
 
 	        processBuilder.redirectErrorStream(true);
-
 	        Process process = processBuilder.start();
+	        
+	     // Handle process output and error streams
+	        Thread outputThread = new Thread(() -> {
+	            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+	                String line;
+	                while ((line = reader.readLine()) != null) {
+	                    System.out.println("[FFmpeg Output] " + line);
+	                }
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	        });
+	        outputThread.start();
+	        
+	        /*
+	         * 
+	         * tempotrarily commented out, but working.
+	         * 
 	        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
 	            String line;
 	            while ((line = reader.readLine()) != null) System.out.println(line);
 	        }
+	        */
 	        
 	        boolean completed = process.waitFor(60, TimeUnit.SECONDS); // Wait for up to 60 seconds
 	        if (!completed) {
