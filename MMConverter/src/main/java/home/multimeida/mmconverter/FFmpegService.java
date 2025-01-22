@@ -70,6 +70,8 @@ public class FFmpegService {
 	        );
 	        */
 	        
+	        // this is a new change in the service file
+	        
 	        // Build FFmpeg command with AVCHD-compliant settings
 	        ProcessBuilder processBuilder = new ProcessBuilder(
 	            ffmpegPath,
