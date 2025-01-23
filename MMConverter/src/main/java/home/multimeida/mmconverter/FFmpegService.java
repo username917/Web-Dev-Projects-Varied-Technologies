@@ -72,6 +72,7 @@ public class FFmpegService {
 	        
 	        // this is a new change in the service file
 	        
+	        /*
 	        // Build FFmpeg command with AVCHD-compliant settings
 	        ProcessBuilder processBuilder = new ProcessBuilder(
 	            ffmpegPath,
@@ -79,7 +80,7 @@ public class FFmpegService {
 	            "-vf", videoFilter, // Scale and pad filter
 	            "-c:v", "libx264", // Use x264 codec
 	            "-preset", "fast", // Set encoding speed
-	            "-b:v", "15M", // Set video bitrate to 15 Mbps (consistent with AVCHD standard)
+	            "-b:v", "14.8M", // Set video bitrate to 15 Mbps (consistent with AVCHD standard)
 	            "-r", "29.97", // Set frame rate to 29.97 fps (AVCHD standard)
 	            "-flags", "+ilme+ildct", // Enforce interlaced video encoding
 	            "-x264opts", "keyint=15:min-keyint=15:ref=2", // Short GOP structure for AVCHD
@@ -87,12 +88,40 @@ public class FFmpegService {
 	            "-b:a", "256k", // Set audio bitrate to 256 kbps
 	            "-ar", "48000", // Set audio sample rate to 48 kHz
 	            "-ac", "2", // Set audio channels to stereo
-	            "-metadata", "service_provider=Canon", // Mimic Canon metadata
-	            "-metadata", "service_name=Canon AVCHD", // Mimic Canon metadata
-	            "-bsf:v", "h264_mp4toannexb", // Convert H.264 bitstream to Annex B format
-	            "-f", "mpegts", // Output as MPEG-TS format
+	            "-metadata", "service_provider=Canon", // Canon service provider
+	            "-metadata", "service_name=Canon AVCHD", // Canon service name
+	            "-metadata", "Encoded_Application=Canon", // Set Canon as writing application
+	            "-bsf:v", "h264_mp4toannexb", // Convert H.264 bitstream to Annex B
+	            "-f", "mpegts", // Set output format to MPEG-TS
 	            output.getAbsolutePath() // Output file path
 	        );
+			*/
+	        
+	        ProcessBuilder processBuilder = new ProcessBuilder(
+        	    ffmpegPath,
+        	    "-i", input.getAbsolutePath(),
+        	    "-vf", videoFilter, // Scale and pad filter
+        	    "-c:v", "libx264", // Use x264 codec
+        	    "-preset", "fast", // Set encoding speed
+        	    "-b:v", "14.8M", // Set video bitrate
+        	    "-maxrate", "15.6M", // Set maximum bitrate
+        	    "-r", "29.97", // Set frame rate
+        	    "-flags", "+ilme+ildct", // Interlaced encoding
+        	    "-x264opts", "tff:keyint=15:min-keyint=15:ref=2", // Top Field First and GOP structure
+        	    "-c:a", "ac3", // AC-3 audio codec
+        	    "-b:a", "256k", // Audio bitrate
+        	    "-ar", "48000", // Audio sample rate
+        	    "-ac", "2", // Stereo audio
+        	   //  "-metadata", "Encoded_Application=Canon", // Canon application metadata
+        	    "-metadata", "service_provider=Canon", // Canon service provider metadata
+        	    "-metadata", "service_name=Canon AVCHD", // Canon service name metadata
+        	    "-mpegts_service_type", "digital_tv", // Set MPEG-TS service type (if supported)
+        	    "-map", "0:v", // Map video stream
+        	    "-map", "0:a", // Map audio stream
+        	    "-bsf:v", "h264_mp4toannexb", // Convert H.264 to Annex B
+        	    "-f", "mpegts", // MPEG-TS format
+        	    output.getAbsolutePath() // Output file path
+        	);
 
 
 	        processBuilder.redirectErrorStream(true);
