@@ -1,4 +1,3 @@
-# React-Projects
-React-Projects
+# Varied Projects
 
-This repository is for developing various sample React projects that can be sampled for general use.
+THe point of this repository is to develop standalone and web development projects that may have Java at the core, but may also include React or other frameworks.
