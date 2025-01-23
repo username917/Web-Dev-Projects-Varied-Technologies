@@ -97,7 +97,7 @@ public class FFmpegService {
 	        );
 			*/
 	        
-	        // further testng
+	        // further testng on AVCHD compliance
 	        
 	        ProcessBuilder processBuilder = new ProcessBuilder(
         	    ffmpegPath,
