@@ -3,7 +3,7 @@ package com.payment_system.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.payment_system.service.PaymentGateway;
+import com.payment_system.service.PaymentGatewayClass;
 
 
 
@@ -11,7 +11,7 @@ import com.payment_system.service.PaymentGateway;
 public class AppConfig {
 
     @Bean
-    public PaymentGateway paymentGateway() {
-        return new PaymentGateway();
+    public PaymentGatewayClass paymentGateway() {
+        return new PaymentGatewayClass();
     }
 }
