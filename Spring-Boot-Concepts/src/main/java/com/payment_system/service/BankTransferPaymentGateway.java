@@ -7,7 +7,7 @@ public class BankTransferPaymentGateway implements PaymentGateway{
 	
 	@Override
 	public String processPayment() {
-		return "Processing payment via bank transfer...":
+		return "Processing payment via bank transfer...";
 	}
 
 }
