@@ -2,20 +2,24 @@ package com.payment_system.service;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.MeterRegistry;
 
 @Service
 public class PaymentService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PaymentService.class);
+	private final Counter paymentCounter;
+	
+	public PaymentService(MeterRegistry meterRegistry) {
+		this.paymentCounter = meterRegistry.counter("payments.processed");
+	}
 	
 	public String processPayment(PaymentGateway paymentGateway) {
 		
