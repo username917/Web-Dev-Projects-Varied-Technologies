@@ -17,51 +17,54 @@ import com.payment_system.service.PaymentService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+import com.payment_system.exceptions.InvalidPaymentException;
+import com.payment_system.exceptions.PaymentException;
 
 @RestController
 @RequestMapping("/payment")
 public class PaymentController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
-	
-	private final Map<String, PaymentGateway> paymentGateways;
-	private final PaymentService paymentService;
+    
+    private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
+    
+    private final Map<String, PaymentGateway> paymentGateways;
+    private final PaymentService paymentService;
 
-	public PaymentController(
-				PaymentService paymentService,
-				@Qualifier("creditCardPaymentGateway") PaymentGateway creditCardPayment,
-				@Qualifier("paypalPaymentGateway") PaymentGateway paypalPayment,
-				@Qualifier("bankTransferPaymentGateway") PaymentGateway bankTransferPayment
-			) {
+    public PaymentController(
+                PaymentService paymentService,
+                @Qualifier("creditCardPaymentGateway") PaymentGateway creditCardPayment,
+                @Qualifier("paypalPaymentGateway") PaymentGateway paypalPayment,
+                @Qualifier("bankTransferPaymentGateway") PaymentGateway bankTransferPayment
+            ) {
 
-		 this.paymentService = paymentService;
-		 this.paymentGateways = new HashMap<>();
-	     this.paymentGateways.put("creditcard", creditCardPayment);
-	     this.paymentGateways.put("paypal", paypalPayment);
-	     this.paymentGateways.put("banktransfer", bankTransferPayment);
-	}
-	
-	@GetMapping("/process")
-	public String processPayment(@RequestParam String method, HttpServletRequest request) {
-		
-		String clientIp = request.getRemoteAddr();
-		Instant requestTime = Instant.now();
-		
-		logger.info("Incoming Payment Request | Method: {} | IP: {} | Time: {}",
-				method, clientIp, requestTime);
-		
-		PaymentGateway gateway = paymentGateways.get(method.toLowerCase());
-		
-		if (gateway == null) {
-			
-			logger.warn("Invalid Payment Method | MethodL {} | IP: {} | TIme: {}",
-					method, clientIp, requestTime);
-			
-			return "Invalid payment method. Choose from one of the following: " + paymentGateways.keySet();
-		}
-		
-		return paymentService.processPayment(gateway);
-	
-	}
-	
+         this.paymentService = paymentService;
+         this.paymentGateways = new HashMap<>();
+         this.paymentGateways.put("creditcard", creditCardPayment);
+         this.paymentGateways.put("paypal", paypalPayment);
+         this.paymentGateways.put("banktransfer", bankTransferPayment);
+    }
+    
+    @GetMapping("/process")
+    public String processPayment(@RequestParam String method, HttpServletRequest request) {
+        
+        String clientIp = request.getRemoteAddr();
+        Instant requestTime = Instant.now();
+        
+        logger.info("Incoming Payment Request | Method: {} | IP: {} | Time: {}",
+                method, clientIp, requestTime);
+        
+        PaymentGateway gateway = paymentGateways.get(method.toLowerCase());
+        
+        if (gateway == null) {
+            logger.warn("Invalid Payment Method | Method: {} | IP: {} | Time: {}",
+                    method, clientIp, requestTime);
+            throw new InvalidPaymentException("Invalid payment method: " + method);  // Throw exception instead of returning string
+        }
+        
+        try {
+            return paymentService.processPayment(gateway);
+        } catch (PaymentException e) {
+            logger.error("Payment processing failed: {}", e.getMessage());
+            throw e;  // Rethrow the exception to be caught by global handler
+        }
+    }
 }
