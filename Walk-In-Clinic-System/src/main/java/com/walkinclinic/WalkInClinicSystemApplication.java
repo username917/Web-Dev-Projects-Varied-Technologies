@@ -9,5 +9,5 @@ public class WalkInClinicSystemApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(WalkInClinicSystemApplication.class, args);
 	}
-
+// making a comment to commit test
 }
