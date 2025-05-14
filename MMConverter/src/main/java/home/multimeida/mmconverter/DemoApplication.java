@@ -12,7 +12,7 @@ public class DemoApplication {
 
 	 public static void main(String[] args) {
 		 
-		 	//staging a change. test transaction.
+		 	//staging a change. test transaction with a refreshed token.
 		
 	        // Disable headless mode
 	        System.setProperty("java.awt.headless", "false");
