@@ -8,13 +8,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "doctor")
+@Table(name = "doctors")
 public class Doctor {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "doctorid")
-	private int doctorid;
+	@Column(name = "idDoctor")
+	private int idDoctor;
 	
 	@Column(name = "fName")
 	private String fName;
@@ -28,18 +28,18 @@ public class Doctor {
 	@Column(name = "availability")
 	private String availability;
 	
-	@Column(name = "contactinfo")
-	private String contactinfo;
+	@Column(name = "contactInfo")
+	private String contactInfo;
 	
 	@Column(name = "education")
 	private String education;
 
-	public int getDoctorid() {
-		return doctorid;
+	public int getIdDoctor() {
+		return idDoctor;
 	}
 
-	public void setDoctorid(int doctorid) {
-		this.doctorid = doctorid;
+	public void setIdDoctor(int idDoctor) {
+		this.idDoctor = idDoctor;
 	}
 
 	public String getfName() {
@@ -74,12 +74,12 @@ public class Doctor {
 		this.availability = availability;
 	}
 
-	public String getContactinfo() {
-		return contactinfo;
+	public String getContactInfo() {
+		return contactInfo;
 	}
 
-	public void setContactinfo(String contactinfo) {
-		this.contactinfo = contactinfo;
+	public void setContactInfo(String contactInfo) {
+		this.contactInfo = contactInfo;
 	}
 
 	public String getEducation() {
@@ -89,9 +89,30 @@ public class Doctor {
 	public void setEducation(String education) {
 		this.education = education;
 	}
-	
-	
-	
+
+	@Override
+	public String toString() {
+		return "Doctor [idDoctor=" + idDoctor + ", fName=" + fName + ", lName=" + lName + ", specialty=" + specialty
+				+ ", availability=" + availability + ", contactInfo=" + contactInfo + ", education=" + education + "]";
+	}
+
+	private Doctor(int idDoctor, String fName, String lName, String specialty, String availability, String contactInfo,
+			String education) {
+		super();
+		this.idDoctor = idDoctor;
+		this.fName = fName;
+		this.lName = lName;
+		this.specialty = specialty;
+		this.availability = availability;
+		this.contactInfo = contactInfo;
+		this.education = education;
+	}
+
+	private Doctor() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	
 
 }
