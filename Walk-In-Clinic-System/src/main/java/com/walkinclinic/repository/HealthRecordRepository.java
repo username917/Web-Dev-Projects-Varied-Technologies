@@ -1,5 +1,9 @@
 package com.walkinclinic.repository;
 
-public interface HealthRecordRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.walkinclinic.Models.HealthRecord;
+
+public interface HealthRecordRepository extends JpaRepository<HealthRecord, Integer> {
 
 }

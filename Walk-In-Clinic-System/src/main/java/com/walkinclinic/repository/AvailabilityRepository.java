@@ -1,5 +1,9 @@
 package com.walkinclinic.repository;
 
-public interface AvailabilityRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.walkinclinic.Models.Availability;
+
+public interface AvailabilityRepository extends JpaRepository<Availability, Integer> {
 
 }

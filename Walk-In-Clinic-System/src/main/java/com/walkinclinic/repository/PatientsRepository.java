@@ -1,5 +1,9 @@
 package com.walkinclinic.repository;
 
-public interface PatientsRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.walkinclinic.Models.Patient;
+
+public interface PatientsRepository extends JpaRepository<Patient, Integer> {
 
 }
