@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.walkinclinic.Models.Doctor;
 
-public interface DoctorRepo extends JpaRepository<DoctorRepo, Integer> {
+public interface DoctorRepo extends JpaRepository<Doctor, Integer> {
 	
 	@Query(value = "SELECT doctor FROM doctors WHERE specialty = :specialty", nativeQuery = true)
 	public List<Doctor> getDoctorsBySpecialty(@Param("spscialty") String specialty);
