@@ -2,27 +2,32 @@ package com.walkinclinic.Services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.walkinclinic.DTO.AppointmentDTO;
 import com.walkinclinic.Models.Appointment;
-import com.walkinclinic.Models.Reminder;
+import com.walkinclinic.repository.AppointmentsRepository;
 
 @Service
 public class AppointmentsService {
 	
+	@Autowired
+	AppointmentsRepository apptRepo;
 	// checking doctor availability
 	
-	public List<String> checkDoctorAvailability() {
-		return null;
+	public String checkDoctorAvailability(String docName) {
 		
+		return apptRepo.checkDoctorAvailability(docName);
 		
 	}
 	
 	
 	// book an appointment
 	
-	public void bookAppointment(Appointment apptData) {
+	public Appointment bookAppointment(Appointment apptData) {
 		
+		return apptRepo.save(apptData);
 		
 	}
 	
@@ -30,7 +35,14 @@ public class AppointmentsService {
 	
 	// reschedule appointment
 	
-	public void rescheduleAppointment(Appointment apptData) {
+	public Appointment rescheduleAppointment(Integer apptid, AppointmentDTO appointmentDTO) {
+		
+		Appointment existingAppt = apptRepo.findById(apptid)
+				.orElseThrow(() -> new RuntimeException("Appointment not found with specified id."));
+		
+		existingAppt.setDateAppointment(appointmentDTO.getDateAppointment());
+		
+		return apptRepo.save(existingAppt);
 		
 		
 	}
@@ -49,8 +61,11 @@ public class AppointmentsService {
 	
 	// cancel appointment
 	
-	public void cancelAppointment(Integer apptId) {
+	public boolean cancelAppointment(Integer idAppointment) {
 		
+		int rowsDeleted = apptRepo.cancelAppointment(idAppointment);
+		
+		return rowsDeleted > 0;
 		
 	}
 	
@@ -58,9 +73,9 @@ public class AppointmentsService {
 	// view and search appointment history
 	
 	public List<Appointment> viewAndSearchApptHistory() {
-		return null;
 		
-		
+		return apptRepo.findAll();
+	
 	}
 	
 	
@@ -70,5 +85,8 @@ public class AppointmentsService {
 		
 		
 	}
+
+
+
 
 }
