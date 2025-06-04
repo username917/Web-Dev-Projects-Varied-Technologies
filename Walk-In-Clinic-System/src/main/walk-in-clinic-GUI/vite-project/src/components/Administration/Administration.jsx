@@ -4,8 +4,8 @@
 
 import React, { useState } from 'react';
 import { Container, Row, Col, ListGroup } from 'react-bootstrap';
-import Doctor from "../Entities/Doctor";
-import Appointment from "../Entities/Appointment";
+import Doctor from "../Entities/Doctor.jsx";
+import Appointment from "../Entities/Appointment.jsx";
 
 const Administration = () => {
 	
@@ -34,14 +34,14 @@ const Administration = () => {
 						<ListGroup.Item
 							action
 							active={selectedMenu === "Doctors"}
-							onClick={setSelectedMenu("Doctors")}
+							onClick={() => setSelectedMenu("Doctors")}
 						>
 							Doctors
 						</ListGroup.Item>
 						<ListGroup.Item
 							action
 							active={selectedMenu === "Appointments"}
-							onClick={setSelectedMenu("Appointments")}
+							onClick={() => setSelectedMenu("Appointments")}
 						>
 							Appointments
 						</ListGroup.Item>

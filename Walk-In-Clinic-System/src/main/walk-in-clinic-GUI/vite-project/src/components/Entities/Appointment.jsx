@@ -2,7 +2,7 @@
  * this component is for managing appointments in the adinsitrative component
  */
 import React, { useState, useEffect } from 'react';
-import apiService from "../../services/apIService";
+import apiService from "../../services/apiService";
 import { Table, Button } from "react-bootstrap";
 
 const Appointments = () => {
@@ -29,7 +29,7 @@ const Appointments = () => {
 		
 		<>
 			<h3>Appointments</h3>
-			<Button varinat="priamry" className="mb-3">Add New Record</Button>
+			<Button variant="priamry" className="mb-3">Add New Record</Button>
 			
 			<Table striped bordered hover>
 				<thead>

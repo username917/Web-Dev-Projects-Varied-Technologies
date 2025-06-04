@@ -14,9 +14,6 @@ const apiService = {
 			
 			return await axios.get(API_BASE_URL + "/get-doctors");
 			
-			
-			
-			
 		} catch (error) {
 			
 			console.log("The error in retrieving the docor list is: " ,error);
@@ -42,4 +39,4 @@ const apiService = {
 	
 }
 
-export default apIService;
+export default apiService;

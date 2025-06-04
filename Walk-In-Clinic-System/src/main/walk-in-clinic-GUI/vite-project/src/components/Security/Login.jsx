@@ -2,11 +2,18 @@
  * this will be the login component that secures access to the project 
  */
 
+import React, { useState} from 'react';
+import { Container, Row, Col, ListGroup, Form, Button, Alert } from 'react-bootstrap';
+import apiService from "../../services/apiService";
+import { useNavigate } from 'react-router-dom';
+
 const Login = () => {
 	
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
+	
+	const navigate= useNavigate();
 	
 	const evaluateLogin = async () => {
 		
@@ -15,14 +22,21 @@ const Login = () => {
 			password: password
 		}
 		
-		if (!email || !password) {
+		if (!username || !password) {
 			
 			setError("Email and password are required");
 			return;
 		}
 		
 		const respLogin = await apiService.evaluateLogin(loginData);
-		console.log("The response from the login attempt is: ", respLogin.data);
+		
+		if (respLogin) {
+			console.log("The response from the login attempt is: ", respLogin.data);
+			navgiate("/administration")
+		} else {
+			console.log("Login request failed");
+		}
+		
 		
 	}
 	
@@ -57,7 +71,7 @@ const Login = () => {
 								/>
 							</Form.Group>
 							
-							<Button variant="primary" type="submit" className="w-100" onCLick={evaluateLogin}>
+							<Button variant="primary" type="submit" className="w-100" onClick={evaluateLogin}>
 								Login
 							</Button>
 						</Form>
@@ -68,3 +82,5 @@ const Login = () => {
 	)
 	
 }
+
+export default Login;
