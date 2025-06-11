@@ -20,8 +20,12 @@ const Appointments = () => {
 		const respAppointments = await apiService.getAppointments();
 		console.log("The response from the API service is: ", respAppointments.data);
 		
-		const appointments = respAppointments.data;
-		setAppointments(appointments);
+		if (respAppointments) {
+			
+			const appointments = respAppointments.data;
+			setAppointments(appointments);
+		}
+		
 		
 	}
 	

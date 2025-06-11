@@ -34,6 +34,19 @@ const apiService = {
 			
 			console.log("The error in validating login is:", error);
 		}
+	},
+	
+	async getAppointments() {
+		
+		try {
+			
+			return await axios.get(API_BASE_URL + "/view-appointments")
+			
+			
+		} catch (error) {
+			
+			console.log("The error in retrieving appointments is: , error");
+		}
 	}
 	
 	

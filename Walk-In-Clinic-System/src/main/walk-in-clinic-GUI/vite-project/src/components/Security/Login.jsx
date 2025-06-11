@@ -32,7 +32,7 @@ const Login = () => {
 		
 		if (respLogin) {
 			console.log("The response from the login attempt is: ", respLogin.data);
-			navgiate("/administration")
+			navigate("/administration")
 		} else {
 			console.log("Login request failed");
 		}
