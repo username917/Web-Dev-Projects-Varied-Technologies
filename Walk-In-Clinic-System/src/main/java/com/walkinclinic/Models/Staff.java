@@ -34,6 +34,8 @@ public class Staff {
 	@Column(name = "lastName")
 	private String lastName;
 	
+	// testing new change 
+	
 	@Column(name = "email")
 	private String email;
 	
