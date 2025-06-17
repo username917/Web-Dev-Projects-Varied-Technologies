@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,6 +17,13 @@ public class Staff {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idStaff")
 	private int idStaff;
+	
+	@Column(name = "userid")
+	private int userid;
+	
+	@OneToOne
+    @JoinColumn(name = "userid")
+    private User user;
 	
 	@Column(name = "role")
 	private String role;
@@ -101,16 +110,19 @@ public class Staff {
 		this.password = password;
 	}
 
-	@Override
-	public String toString() {
-		return "Staff [idStaff=" + idStaff + ", role=" + role + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", email=" + email + ", phone=" + phone + ", username=" + username + ", password=" + password + "]";
+	public int getUserid() {
+		return userid;
 	}
 
-	private Staff(int idStaff, String role, String firstName, String lastName, String email, String phone,
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+	
+	private Staff(int idStaff, int userid, String role, String firstName, String lastName, String email, String phone,
 			String username, String password) {
 		super();
 		this.idStaff = idStaff;
+		this.userid = userid;
 		this.role = role;
 		this.firstName = firstName;
 		this.lastName = lastName;

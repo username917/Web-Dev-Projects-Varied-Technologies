@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,6 +17,15 @@ public class Patient {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "isPatient")
 	private int idPatient;
+	
+	@OneToOne
+    @JoinColumn(name = "userid")
+    private User user;
+	
+	@Column(name = "userid")
+	@OneToOne
+	@JoinColumn(name = "userid")
+	private int userid;
 	
 	@Column(name = "firstName")
 	private String firstName;
@@ -123,18 +134,21 @@ public class Patient {
 		this.emergencyContactPhone = emergencyContactPhone;
 	}
 
-	@Override
-	public String toString() {
-		return "Patient [idPatient=" + idPatient + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", dateOfBirth=" + dateOfBirth + ", gender=" + gender + ", phone=" + phone + ", email=" + email
-				+ ", address=" + address + ", emergencyContactName=" + emergencyContactName + ", emergencyContactPhone="
-				+ emergencyContactPhone + "]";
+	public int getUserid() {
+		return userid;
 	}
 
-	private Patient(int idPatient, String firstName, String lastName, String dateOfBirth, String gender, String phone,
-			String email, String address, String emergencyContactName, String emergencyContactPhone) {
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	
+
+	private Patient(int idPatient, int userid, String firstName, String lastName, String dateOfBirth, String gender,
+			String phone, String email, String address, String emergencyContactName, String emergencyContactPhone) {
 		super();
 		this.idPatient = idPatient;
+		this.userid = userid;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;

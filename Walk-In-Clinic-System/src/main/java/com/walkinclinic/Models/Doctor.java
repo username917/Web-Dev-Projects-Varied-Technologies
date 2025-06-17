@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,6 +35,10 @@ public class Doctor {
 	
 	@Column(name = "education")
 	private String education;
+	
+	@OneToOne
+    @JoinColumn(name = "userid")
+    private User user;
 
 	public int getIdDoctor() {
 		return idDoctor;
