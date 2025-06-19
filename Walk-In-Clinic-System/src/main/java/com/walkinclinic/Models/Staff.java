@@ -18,9 +18,6 @@ public class Staff {
 	@Column(name = "idStaff")
 	private int idStaff;
 	
-	@Column(name = "userid")
-	private int userid;
-	
 	@OneToOne
     @JoinColumn(name = "userid")
     private User user;
@@ -33,10 +30,7 @@ public class Staff {
 	
 	@Column(name = "lastName")
 	private String lastName;
-	
-	
-	// test another new  change June 16 2025
-	
+
 	@Column(name = "email")
 	private String email;
 	
@@ -112,20 +106,13 @@ public class Staff {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public int getUserid() {
-		return userid;
-	}
-
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
 	
-	private Staff(int idStaff, int userid, String role, String firstName, String lastName, String email, String phone,
+	
+	private Staff(int idStaff, User user, String role, String firstName, String lastName, String email, String phone,
 			String username, String password) {
 		super();
 		this.idStaff = idStaff;
-		this.userid = userid;
+		this.user = user;
 		this.role = role;
 		this.firstName = firstName;
 		this.lastName = lastName;

@@ -37,10 +37,10 @@ public class User {
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private Doctor doctor;
 	
-	@OneToOne(mappedBy = "patients", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private Patient patient;
 	
-	@OneToOne(mappedBy = "staff", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private Staff staff;
 
 	public int getUserid() {

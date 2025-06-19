@@ -4,7 +4,7 @@
 
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8080/api'; // Spring Boot server URL
+const API_BASE_URL = '/api'; // Spring Boot server URL
 
 const apiService = {
 	
@@ -22,13 +22,11 @@ const apiService = {
 	
 	async evaluateLogin(loginData) {
 		
+		console.log("The content of login data is: ", loginData);
+		
 		try {
 			
-			return await axios.post(API_BASE_URL + "/evaluate-login", { 
-				
-				params: loginData
-				
-			});
+			return await axios.post(API_BASE_URL + "/evaluate-login", loginData);
 			
 		} catch (error) {
 			

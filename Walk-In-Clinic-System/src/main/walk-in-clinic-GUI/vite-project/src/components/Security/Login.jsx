@@ -28,14 +28,24 @@ const Login = () => {
 			return;
 		}
 		
-		const respLogin = await apiService.evaluateLogin(loginData);
-		
-		if (respLogin) {
-			console.log("The response from the login attempt is: ", respLogin.data);
-			navigate("/administration")
-		} else {
-			console.log("Login request failed");
+		console.log("The content of loginData is:", loginData);
+		try {
+			const respLogin = await apiService.evaluateLogin(loginData);
+			
+			if (respLogin) {
+				console.log("The response from the login attempt is: ", respLogin.data);
+				navigate("/administration")
+			} else {
+				console.log("Login request failed");
+			}
+			
+		} catch (error) {
+			
+			console.log("The error in logging is: ", error);
 		}
+		
+		
+		
 		
 		
 	}
@@ -48,7 +58,11 @@ const Login = () => {
 					<Col md={4}>
 						<h2 className="text-center">Login</h2>
 						{error && <Alert variant="danger">{error}</Alert>}
-						<Form>
+						<Form onSubmit={(e) => {
+						  e.preventDefault();
+						  evaluateLogin();
+						}}>
+
 							<Form.Group controlId="formEmail" className="mb-3">
 								<Form.Label>Email address</Form.Label>
 								<Form.Control
@@ -71,9 +85,9 @@ const Login = () => {
 								/>
 							</Form.Group>
 							
-							<Button variant="primary" type="submit" className="w-100" onClick={evaluateLogin}>
-								Login
-							</Button>
+							<Button variant="primary" type="submit" className="w-100 mt-3">
+							    Login
+							  </Button>
 						</Form>
 					</Col>
 				</Row>

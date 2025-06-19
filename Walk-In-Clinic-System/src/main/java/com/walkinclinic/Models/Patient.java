@@ -22,11 +22,6 @@ public class Patient {
     @JoinColumn(name = "userid")
     private User user;
 	
-	@Column(name = "userid")
-	@OneToOne
-	@JoinColumn(name = "userid")
-	private int userid;
-	
 	@Column(name = "firstName")
 	private String firstName;
 	
@@ -134,21 +129,12 @@ public class Patient {
 		this.emergencyContactPhone = emergencyContactPhone;
 	}
 
-	public int getUserid() {
-		return userid;
-	}
 
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
-
-	
-
-	private Patient(int idPatient, int userid, String firstName, String lastName, String dateOfBirth, String gender,
+	private Patient(int idPatient, User user, String firstName, String lastName, String dateOfBirth, String gender,
 			String phone, String email, String address, String emergencyContactName, String emergencyContactPhone) {
 		super();
 		this.idPatient = idPatient;
-		this.userid = userid;
+		this.user = user;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.dateOfBirth = dateOfBirth;
