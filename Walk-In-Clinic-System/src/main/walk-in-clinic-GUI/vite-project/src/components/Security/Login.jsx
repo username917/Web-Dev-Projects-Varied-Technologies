@@ -29,13 +29,21 @@ const Login = () => {
 		}
 		
 		console.log("The content of loginData is:", loginData);
+		
 		try {
+			
 			const respLogin = await apiService.evaluateLogin(loginData);
 			
-			if (respLogin) {
+			if (respLogin.token) {
+				
+				localStorage.setItem("authToken", respLogin.token);
+				
 				console.log("The response from the login attempt is: ", respLogin.data);
+				
 				navigate("/administration")
+			
 			} else {
+			
 				console.log("Login request failed");
 			}
 			
@@ -43,10 +51,6 @@ const Login = () => {
 			
 			console.log("The error in logging is: ", error);
 		}
-		
-		
-		
-		
 		
 	}
 	
