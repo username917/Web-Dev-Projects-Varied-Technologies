@@ -1,10 +1,13 @@
 package com.walkinclinic;
 
+import java.security.Key;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -14,15 +17,15 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
-import java.security.Key;
 
 @Service
 public class JwtService {
 	
-	private static final String SECRET_KEY = "secret-key";
+	@Value("${jwt.secret}")
+	private String secretKey;
 	
 	private Key getSigningKey() {
-        return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+        return Keys.hmacShaKeyFor(Base64.getDecoder().decode(secretKey));
     }
 	
 	public String extractUsername(String token) {
