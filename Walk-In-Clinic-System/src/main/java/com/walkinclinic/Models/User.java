@@ -1,9 +1,14 @@
 package com.walkinclinic.Models;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -17,31 +22,39 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "userid")
 	private int userid;
 	
+	@Column(name = "username")
 	private String username;
 	
+	@Column(name = "password")
 	private String password;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "user_roles",
 			joinColumns = @JoinColumn(name = "userid"),
 			inverseJoinColumns = @JoinColumn(name = "roleid"))
 	private Set<Role> roles = new HashSet<>();
 
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Doctor doctor;
 	
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Patient patient;
 	
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private Staff staff;
+	
+	@Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles; // Roles now implement GrantedAuthority
+    }
 
 	public int getUserid() {
 		return userid;

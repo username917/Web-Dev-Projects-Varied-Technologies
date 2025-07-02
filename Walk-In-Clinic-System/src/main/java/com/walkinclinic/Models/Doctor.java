@@ -15,14 +15,18 @@ public class Doctor {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idDoctor")
-	private int idDoctor;
+	@Column(name = "id_doctor")
+	private int id_Doctor;
 	
-	@Column(name = "fName")
-	private String fName;
+	@OneToOne
+    @JoinColumn(name = "userid")
+    private User user;
 	
-	@Column(name = "lName")
-	private String lName;
+	@Column(name = "first_name")
+	private String first_name;
+	
+	@Column(name = "last_name")
+	private String last_name;
 	
 	@Column(name = "specialty")
 	private String specialty;
@@ -30,38 +34,42 @@ public class Doctor {
 	@Column(name = "availability")
 	private String availability;
 	
-	@Column(name = "contactInfo")
-	private String contactInfo;
+	@Column(name = "contact_info")
+	private String contact_info;
 	
 	@Column(name = "education")
 	private String education;
-	
-	@OneToOne
-    @JoinColumn(name = "userid")
-    private User user;
 
-	public int getIdDoctor() {
-		return idDoctor;
+	public int getId_Doctor() {
+		return id_Doctor;
 	}
 
-	public void setIdDoctor(int idDoctor) {
-		this.idDoctor = idDoctor;
+	public void setId_Doctor(int id_Doctor) {
+		this.id_Doctor = id_Doctor;
 	}
 
-	public String getfName() {
-		return fName;
+	public User getUser() {
+		return user;
 	}
 
-	public void setfName(String fName) {
-		this.fName = fName;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public String getlName() {
-		return lName;
+	public String getFirst_name() {
+		return first_name;
 	}
 
-	public void setlName(String lName) {
-		this.lName = lName;
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+
+	public String getLast_name() {
+		return last_name;
+	}
+
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
 	}
 
 	public String getSpecialty() {
@@ -80,12 +88,12 @@ public class Doctor {
 		this.availability = availability;
 	}
 
-	public String getContactInfo() {
-		return contactInfo;
+	public String getContact_info() {
+		return contact_info;
 	}
 
-	public void setContactInfo(String contactInfo) {
-		this.contactInfo = contactInfo;
+	public void setContact_info(String contact_info) {
+		this.contact_info = contact_info;
 	}
 
 	public String getEducation() {
@@ -96,21 +104,16 @@ public class Doctor {
 		this.education = education;
 	}
 
-	@Override
-	public String toString() {
-		return "Doctor [idDoctor=" + idDoctor + ", fName=" + fName + ", lName=" + lName + ", specialty=" + specialty
-				+ ", availability=" + availability + ", contactInfo=" + contactInfo + ", education=" + education + "]";
-	}
-
-	private Doctor(int idDoctor, String fName, String lName, String specialty, String availability, String contactInfo,
-			String education) {
+	private Doctor(int id_Doctor, User user, String first_name, String last_name, String specialty, String availability,
+			String contact_info, String education) {
 		super();
-		this.idDoctor = idDoctor;
-		this.fName = fName;
-		this.lName = lName;
+		this.id_Doctor = id_Doctor;
+		this.user = user;
+		this.first_name = first_name;
+		this.last_name = last_name;
 		this.specialty = specialty;
 		this.availability = availability;
-		this.contactInfo = contactInfo;
+		this.contact_info = contact_info;
 		this.education = education;
 	}
 
@@ -118,7 +121,6 @@ public class Doctor {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 	
-
+	
 }

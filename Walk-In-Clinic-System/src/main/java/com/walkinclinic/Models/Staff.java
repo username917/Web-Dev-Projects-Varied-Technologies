@@ -15,8 +15,8 @@ public class Staff {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idStaff")
-	private int idStaff;
+	@Column(name = "id_staff")
+	private int id_staff;
 	
 	@OneToOne
     @JoinColumn(name = "userid")
@@ -25,30 +25,32 @@ public class Staff {
 	@Column(name = "role")
 	private String role;
 	
-	@Column(name = "firstName")
-	private String firstName;
+	@Column(name = "first_name")
+	private String first_name;
 	
-	@Column(name = "lastName")
-	private String lastName;
+	@Column(name = "last_name")
+	private String last_name;
 
 	@Column(name = "email")
 	private String email;
 	
 	@Column(name = "phone")
 	private String phone;
-	
-	@Column(name = "username")
-	private String username;
-	
-	@Column(name = "password")
-	private String password;
 
-	public int getIdStaff() {
-		return idStaff;
+	public int getId_staff() {
+		return id_staff;
 	}
 
-	public void setIdStaff(int idStaff) {
-		this.idStaff = idStaff;
+	public void setId_staff(int id_staff) {
+		this.id_staff = id_staff;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getRole() {
@@ -59,20 +61,20 @@ public class Staff {
 		this.role = role;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getFirst_name() {
+		return first_name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getLast_name() {
+		return last_name;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
 	}
 
 	public String getEmail() {
@@ -91,42 +93,25 @@ public class Staff {
 		this.phone = phone;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	
-	
-	private Staff(int idStaff, User user, String role, String firstName, String lastName, String email, String phone,
-			String username, String password) {
+
+	private Staff(int id_staff, User user, String role, String first_name, String last_name, String email, String phone) {
 		super();
-		this.idStaff = idStaff;
+		this.id_staff = id_staff;
 		this.user = user;
 		this.role = role;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.first_name = first_name;
+		this.last_name = last_name;
 		this.email = email;
 		this.phone = phone;
-		this.username = username;
-		this.password = password;
+
 	}
 
 	private Staff() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	
 
 }

@@ -15,20 +15,20 @@ public class Patient {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "isPatient")
+	@Column(name = "id_patient")
 	private int idPatient;
 	
 	@OneToOne
     @JoinColumn(name = "userid")
     private User user;
 	
-	@Column(name = "firstName")
+	@Column(name = "first_name")
 	private String firstName;
 	
-	@Column(name = "lastName")
+	@Column(name = "last_name")
 	private String lastName;
 	
-	@Column(name = "dateOfBirth")
+	@Column(name = "date_of_birth")
 	private String dateOfBirth;
 	
 	@Column(name = "gender")
@@ -43,10 +43,10 @@ public class Patient {
 	@Column(name = "address")
 	private String address;
 	
-	@Column(name = "emergencyContactName")
+	@Column(name = "emergency_contact_name")
 	private String emergencyContactName;
 	
-	@Column(name = "emergencyContactPhone")
+	@Column(name = "emergency_contact_phone")
 	private String emergencyContactPhone;
 
 	public int getIdPatient() {

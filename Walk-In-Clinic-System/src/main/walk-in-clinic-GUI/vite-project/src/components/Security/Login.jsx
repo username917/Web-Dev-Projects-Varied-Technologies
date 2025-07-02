@@ -33,6 +33,7 @@ const Login = () => {
 		try {
 			
 			const respLogin = await apiService.evaluateLogin(loginData);
+			console.log("The response from respLogin is: ", respLogin);
 			
 			if (respLogin.token) {
 				

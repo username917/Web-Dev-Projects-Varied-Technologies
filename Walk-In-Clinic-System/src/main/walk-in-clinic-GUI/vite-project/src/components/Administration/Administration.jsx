@@ -26,32 +26,36 @@ const Administration = () => {
 	};
 	
 	return (
-		
-		<Container fluid className="mt-4">
-			<Row>
-				<Col md={3}>
-					<ListGroup>
-						<ListGroup.Item
-							action
-							active={selectedMenu === "Doctors"}
-							onClick={() => setSelectedMenu("Doctors")}
-						>
-							Doctors
-						</ListGroup.Item>
-						<ListGroup.Item
-							action
-							active={selectedMenu === "Appointments"}
-							onClick={() => setSelectedMenu("Appointments")}
-						>
-							Appointments
-						</ListGroup.Item>
-					</ListGroup>
-				</Col>
-				<Col md={9}>
+		<div className="admin-dashboard">
+			<div className="sidebar">
+				<ListGroup variant="flush">
+					<ListGroup.Item
+						action
+						active={selectedMenu === "Doctors"}
+						onClick={() => setSelectedMenu("Doctors")}
+					>
+						Doctors
+					</ListGroup.Item>
+					<ListGroup.Item
+						action
+						active={selectedMenu === "Appointments"}
+						onClick={() => setSelectedMenu("Appointments")}
+					>
+						Appointments
+					</ListGroup.Item>
+				</ListGroup>
+			</div>
+			
+			<div className="main-content">
+				<div className="content=wrapper">
 					{renderContent()}
-				</Col>
-			</Row>
-		</Container>
+				</div>
+			</div>
+		
+		</div>
+		
+				
+			
 	)
 
 

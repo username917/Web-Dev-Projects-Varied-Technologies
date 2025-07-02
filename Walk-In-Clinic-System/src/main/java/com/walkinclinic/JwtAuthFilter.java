@@ -20,6 +20,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 	        this.jwtService = jwtService;
 	        this.userDetailsService = userDetailsService;
 	    }
+	 
+		 @Override
+		 protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+		     String path = request.getServletPath();
+		     return path.equals("/api/evaluate-login") || path.equals("/api/auth/login");
+		 }
+
 
 	    @Override
 	    protected void doFilterInternal(
