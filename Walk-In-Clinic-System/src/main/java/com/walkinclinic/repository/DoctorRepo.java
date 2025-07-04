@@ -18,8 +18,11 @@ public interface DoctorRepo extends JpaRepository<Doctor, Integer> {
 
 	@Modifying
 	@Transactional
-	@Query(value = "DELETE FROM doctor WHERE idDoctor = :idDoctor", nativeQuery = true)
+	@Query(value = "DELETE FROM doctors WHERE idDoctor = :idDoctor", nativeQuery = true)
 	public int removeDoctor(Integer idDoctor);
+
+	@Query(value = "SELECT * FROM `walk-in-clinic-schema`.doctors;", nativeQuery = true)
+	public List<Doctor> findAllDoctors();
 	
 
 }

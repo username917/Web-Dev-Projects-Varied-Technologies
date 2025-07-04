@@ -35,6 +35,8 @@ public class DoctorController {
 		
 		List<Doctor> doctors = docService.getAllDoctors();
 		
+		System.out.println("The value of doctor list is :"  + doctors);
+		
 		if (doctors.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}

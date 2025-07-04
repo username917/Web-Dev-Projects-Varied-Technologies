@@ -2,6 +2,7 @@ package com.walkinclinic.Models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,7 +19,7 @@ public class Doctor {
 	@Column(name = "id_doctor")
 	private int id_Doctor;
 	
-	@OneToOne
+	@OneToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "userid")
     private User user;
 	
@@ -104,7 +105,7 @@ public class Doctor {
 		this.education = education;
 	}
 
-	private Doctor(int id_Doctor, User user, String first_name, String last_name, String specialty, String availability,
+	public Doctor(int id_Doctor, User user, String first_name, String last_name, String specialty, String availability,
 			String contact_info, String education) {
 		super();
 		this.id_Doctor = id_Doctor;
@@ -117,7 +118,7 @@ public class Doctor {
 		this.education = education;
 	}
 
-	private Doctor() {
+	public Doctor() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

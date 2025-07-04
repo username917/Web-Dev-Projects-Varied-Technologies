@@ -45,8 +45,68 @@ const apiService = {
 			
 			console.log("The error in retrieving appointments is: , error");
 		}
-	}
+	},
 	
+	// this function retrieves and refreshes the doctor list 
+	
+	async getDoctorList() {
+		
+		try {
+			
+			return await axios.get("/get-doctor-list");
+			
+			
+		} catch (error) {
+			
+			console.log("The error in retrieving the doctor list is: ", error);
+		}
+		
+		
+	},
+	
+	async editDoctor(formData) {
+		
+		try {
+			
+			return await axios.put("/edit-doctor", formData);
+			
+			
+		} catch (error) {
+			
+			console.log("The error in editing doctor is: ", error);
+		}
+		
+		
+	},
+	
+	async createDoctor(formData) {
+		
+		try {
+			
+			return await axios.post("/add-doctor", formData);
+			
+			
+		} catch (error) {
+			
+			console.log("The error in creating a doctor is: ", error)
+		}
+		
+		
+	},
+	
+	async deleteDoctor(doctorid) {
+		
+		try {
+			
+			return await axios.delete("/remove-doctor", doctorid);
+			
+			
+		} catch (error) {
+			
+			console.log("The error in deleting a doctor is: ", error);
+		}
+		
+	}
 	
 }
 

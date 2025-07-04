@@ -24,7 +24,7 @@ public class DoctorService {
 
 	public List<Doctor> getAllDoctors() {
 		// TODO Auto-generated method stub
-		return docRepo.findAll();
+		return docRepo.findAllDoctors();
 	}
 
 	public Doctor addDoctor(Doctor doctor) {
