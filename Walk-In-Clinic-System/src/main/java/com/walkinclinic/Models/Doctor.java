@@ -1,5 +1,7 @@
 package com.walkinclinic.Models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -19,8 +21,10 @@ public class Doctor {
 	@Column(name = "id_doctor")
 	private int id_Doctor;
 	
+	
 	@OneToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "userid")
+	@JsonManagedReference
     private User user;
 	
 	@Column(name = "first_name")

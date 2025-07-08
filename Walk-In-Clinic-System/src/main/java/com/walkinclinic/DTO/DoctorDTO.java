@@ -6,9 +6,9 @@ public class DoctorDTO {
 	
 	private int idDoctor;
 	
-	private String fName;
+	private String first_name;
 	
-	private String lName;
+	private String last_name;
 	
 	private String specialty;
 	
@@ -26,20 +26,20 @@ public class DoctorDTO {
 		this.idDoctor = idDoctor;
 	}
 
-	public String getfName() {
-		return fName;
+	public String getFirst_name() {
+		return first_name;
 	}
 
-	public void setfName(String fName) {
-		this.fName = fName;
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
 	}
 
-	public String getlName() {
-		return lName;
+	public String getLast_name() {
+		return last_name;
 	}
 
-	public void setlName(String lName) {
-		this.lName = lName;
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
 	}
 
 	public String getSpecialty() {
@@ -74,12 +74,18 @@ public class DoctorDTO {
 		this.education = education;
 	}
 
-	private DoctorDTO(int idDoctor, String fName, String lName, String specialty, String availability,
+	
+	public DoctorDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public DoctorDTO(int idDoctor, String first_name, String last_name, String specialty, String availability,
 			String contactInfo, String education) {
 		super();
 		this.idDoctor = idDoctor;
-		this.fName = fName;
-		this.lName = lName;
+		this.first_name = first_name;
+		this.last_name = last_name;
 		this.specialty = specialty;
 		this.availability = availability;
 		this.contactInfo = contactInfo;

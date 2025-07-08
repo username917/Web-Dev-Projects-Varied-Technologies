@@ -8,18 +8,6 @@ const API_BASE_URL = '/api'; // Spring Boot server URL
 
 const apiService = {
 	
-	async getDoctorLst() {
-		
-		try {
-			
-			return await axios.get(API_BASE_URL + "/get-doctors");
-			
-		} catch (error) {
-			
-			console.log("The error in retrieving the docor list is: " ,error);
-		}
-	},
-	
 	async evaluateLogin(loginData) {
 		
 		console.log("The content of login data is: ", loginData);
@@ -51,10 +39,17 @@ const apiService = {
 	
 	async getDoctorList() {
 		
+		const token = localStorage.getItem("token");
+		
+		console.log("The content of token is: ", token);
+		
 		try {
 			
-			return await axios.get("/get-doctor-list");
-			
+			return await axios.get(API_BASE_URL + "/get-doctor-list", {
+			  headers: {
+			    Authorization: `Bearer ${token}`
+			  }
+			});
 			
 		} catch (error) {
 			
@@ -66,9 +61,16 @@ const apiService = {
 	
 	async editDoctor(formData) {
 		
+		const token = localStorage.getItem("token");
+		
 		try {
 			
-			return await axios.put("/edit-doctor", formData);
+			return await axios.put(API_BASE_URL + "/edit-doctor", formData, 			{
+				params: { idDoctor: id }, // ✅ sends ?idDoctor=123 in UR
+				headers: {
+			    Authorization: `Bearer ${token}`
+			  }
+			});
 			
 			
 		} catch (error) {
@@ -83,7 +85,7 @@ const apiService = {
 		
 		try {
 			
-			return await axios.post("/add-doctor", formData);
+			return await axios.post(API_BASE_URL + "/add-doctor", formData);
 			
 			
 		} catch (error) {
@@ -98,7 +100,7 @@ const apiService = {
 		
 		try {
 			
-			return await axios.delete("/remove-doctor", doctorid);
+			return await axios.delete(API_BASE_URL + "/remove-doctor", doctorid);
 			
 			
 		} catch (error) {

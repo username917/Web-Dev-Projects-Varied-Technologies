@@ -33,6 +33,8 @@ const Doctor = () => {
 			
 			const respDoctorList = await apiService.getDoctorList();
 			
+			console.log("The response for doctor list is: ", respDoctorList);
+			
 			if (respDoctorList){
 						
 				const respDoctors = respDoctorList.data;
@@ -141,7 +143,7 @@ const Doctor = () => {
 						<td>{doctor.last_name}</td>
 						<td>{doctor.specialty}</td>
 						<td>{doctor.availability}</td>
-						<td>{doctor.contact_info}</td>
+						<td>{doctor.contactInfo}</td>
 						<td>{doctor.education}</td>
 						<td>
 							<Button 
@@ -181,7 +183,7 @@ const Doctor = () => {
 						</Form.Group>
 						<Form.Group>
 							<Form.Label>Contact Information</Form.Label>
-							<Form.Control name="contact-info" value={formData.contact_info} onChange={handleChange} required/>				
+							<Form.Control name="contact-info" value={formData.contactInfo} onChange={handleChange} required/>				
 						<Form.Group>
 						</Form.Group>
 							<Form.Label>Education</Form.Label>

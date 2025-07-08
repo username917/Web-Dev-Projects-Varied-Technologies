@@ -40,8 +40,8 @@ public class DoctorService {
 		existingDoctor.setAvailability(docDTO.getAvailability());
 		existingDoctor.setContact_info(docDTO.getContactInfo());
 		existingDoctor.setEducation(docDTO.getEducation());
-		existingDoctor.setFirst_name(docDTO.getfName());
-		existingDoctor.setLast_name(docDTO.getlName());
+		existingDoctor.setFirst_name(docDTO.getFirst_name());
+		existingDoctor.setLast_name(docDTO.getLast_name());
 		existingDoctor.setSpecialty(docDTO.getSpecialty());
 		
 		return docRepo.save(existingDoctor);

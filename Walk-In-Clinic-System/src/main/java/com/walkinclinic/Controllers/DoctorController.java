@@ -1,6 +1,7 @@
 package com.walkinclinic.Controllers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +20,7 @@ import com.walkinclinic.Models.Doctor;
 import com.walkinclinic.Services.DoctorService;
 
 @RestController
+@RequestMapping("/api")
 public class DoctorController {
 	
 	@Autowired
@@ -30,19 +33,28 @@ public class DoctorController {
 		
 	}
 	
+
 	@GetMapping("/get-doctor-list")
-	public ResponseEntity<List<Doctor>> getDoctorList() {
-		
-		List<Doctor> doctors = docService.getAllDoctors();
-		
-		System.out.println("The value of doctor list is :"  + doctors);
-		
-		if (doctors.isEmpty()) {
-			return ResponseEntity.noContent().build();
-		}
-		
-		return ResponseEntity.ok(doctors);
+	public ResponseEntity<List<DoctorDTO>> getDoctorList() {
+	    List<Doctor> doctors = docService.getAllDoctors();
+
+	    List<DoctorDTO> dtoList = doctors.stream()
+	        .map(doc -> {
+	            DoctorDTO dto = new DoctorDTO();
+	            dto.setIdDoctor(doc.getId_Doctor());
+	            dto.setFirst_name(doc.getFirst_name());
+	            dto.setLast_name(doc.getLast_name()); // corrected field
+	            dto.setSpecialty(doc.getSpecialty());
+	            dto.setAvailability(doc.getAvailability());
+	            dto.setContactInfo(doc.getContact_info());
+	            dto.setEducation(doc.getEducation());
+	            return dto;
+	        })
+	        .collect(Collectors.toList());
+
+	    return ResponseEntity.ok(dtoList);
 	}
+
 	
 	@PostMapping("/add-doctor")
 	public ResponseEntity<Doctor> addDoctor(@RequestBody Doctor doctor) {
@@ -55,9 +67,13 @@ public class DoctorController {
 	@PutMapping("edit-doctor")
 	public ResponseEntity<Doctor> editDoctor(@RequestParam("idDoctor") Integer idDoctor, @RequestBody DoctorDTO docDTO) {
 		
+		System.out.println("Editing doctor...");
+		;
 		if (!idDoctor.equals(docDTO.getIdDoctor())) {
 			return ResponseEntity.badRequest().build();
 		}
+		
+		System.out.println("Doctor DTO at the API is: " + docDTO);
 		
 		Doctor doctor = docService.editDoctor(idDoctor, docDTO);
 		

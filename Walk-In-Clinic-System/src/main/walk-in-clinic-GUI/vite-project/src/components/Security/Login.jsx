@@ -37,10 +37,10 @@ const Login = () => {
 			
 			//if (respLogin.token) {
 				
-				localStorage.setItem("authToken", respLogin.token);
+				localStorage.setItem("token", respLogin.data);
 				
 				console.log("The response from the login attempt is: ", respLogin.data);
-				
+				console.log("The token isL ", localStorage.getItem("token"));
 				navigate("/administration")
 			
 			//} 
