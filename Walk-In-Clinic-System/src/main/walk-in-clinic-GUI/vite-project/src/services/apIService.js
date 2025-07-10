@@ -66,7 +66,7 @@ const apiService = {
 		try {
 			
 			return await axios.put(API_BASE_URL + "/edit-doctor", formData, 			{
-				params: { idDoctor: id }, // ✅ sends ?idDoctor=123 in UR
+				params: { idDoctor: formData.idDoctor }, // ✅ sends ?idDoctor=123 in UR
 				headers: {
 			    Authorization: `Bearer ${token}`
 			  }

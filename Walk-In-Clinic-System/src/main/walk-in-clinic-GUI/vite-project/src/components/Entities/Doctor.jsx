@@ -13,6 +13,7 @@ const Doctor = () => {
 	const [modalVisible, setModalVisible] = useState(false);
 	
 	const [formData, setFormData] = useState({
+		idDoctor: null,
 		first_name: '',
 		last_name: '',
 		specialty: '',
@@ -80,6 +81,7 @@ const Doctor = () => {
 		
 		setEditingDoctor(null);
 		setFormData({
+			idDoctor: '',
 			first_name: '',
 			last_name: '',
 			specialty: '',
