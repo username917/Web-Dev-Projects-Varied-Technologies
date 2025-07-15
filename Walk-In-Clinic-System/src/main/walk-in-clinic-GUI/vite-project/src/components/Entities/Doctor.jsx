@@ -73,6 +73,8 @@ const Doctor = () => {
 		await apiService.deleteDoctor(doctorid);
 		recallDoctorList();
 		
+		// I am making a change to my project.
+		
 	}
 	
 	// this functions handles the showing of the modal for the modal (?)
