@@ -83,9 +83,19 @@ const apiService = {
 	
 	async createDoctor(formData) {
 		
+		console.log("The form data being submitted is: ", formData);
+		
+		const token = localStorage.getItem("token");
+		
 		try {
 			
-			return await axios.post(API_BASE_URL + "/add-doctor", formData);
+			return await axios.post(API_BASE_URL + "/add-doctor", formData, {
+				
+				headers: {
+				    Authorization: `Bearer ${token}`
+  			    }
+				
+			});
 			
 			
 		} catch (error) {
@@ -96,11 +106,26 @@ const apiService = {
 		
 	},
 	
-	async deleteDoctor(doctorid) {
+	async deleteDoctor(id_doctor) {
+		
+		console.log("The id in trying to delete a doctor is: ", id_doctor);
+		
+		const token = localStorage.getItem("token");
+				
+		console.log("The content of token at deleting a doctor is: ", token);
 		
 		try {
 			
-			return await axios.delete(API_BASE_URL + "/remove-doctor", doctorid);
+			return await axios.delete(API_BASE_URL + "/remove-doctor", {
+				
+				params: {
+					id_doctor: id_doctor
+				},
+				
+				headers: {
+				    Authorization: `Bearer ${token}`
+  			    }
+			});
 			
 			
 		} catch (error) {

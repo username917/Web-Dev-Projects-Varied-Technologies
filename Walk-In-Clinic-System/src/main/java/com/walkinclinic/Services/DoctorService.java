@@ -47,9 +47,9 @@ public class DoctorService {
 		return docRepo.save(existingDoctor);
 	}
 
-	public boolean removeDoctor(Integer idDoctor) {
+	public boolean removeDoctor(Integer id_doctor) {
 		// TODO Auto-generated method stub
-		int rowDeleted = docRepo.removeDoctor(idDoctor);
+		int rowDeleted = docRepo.removeDoctor(id_doctor);
 		
 		return rowDeleted > 0;
 	}

@@ -64,6 +64,17 @@ const Doctor = () => {
 		
 	}
 	
+	// this functions ig going to add a doctor
+	
+	const createDoctor = () =>  {
+		
+		setFormData("");
+		setModalVisible(true);
+		
+	}
+		
+		
+	
 	// this function is going to handle the deletion of a doctor object.
 	
 	const deleteDoctor = async (doctorid) => {
@@ -82,6 +93,7 @@ const Doctor = () => {
 	const handleShowAdd = () => {
 		
 		setEditingDoctor(null);
+		
 		setFormData({
 			idDoctor: '',
 			first_name: '',
@@ -91,6 +103,8 @@ const Doctor = () => {
 			contact_info: '',
 			education: ''
 		})
+		
+		createDoctor();
 	}
 	
 	// this function hanldles both the editing and addition functions for the Doctor component.
@@ -100,8 +114,11 @@ const Doctor = () => {
 		e.preventDefault();
 		
 		if (editingDoctor) {
+			
 			await apiService.editDoctor(formData);
+		
 		} else {
+		
 			await apiService.createDoctor(formData);
 		}
 		
@@ -147,7 +164,7 @@ const Doctor = () => {
 						<td>{doctor.last_name}</td>
 						<td>{doctor.specialty}</td>
 						<td>{doctor.availability}</td>
-						<td>{doctor.contactInfo}</td>
+						<td>{doctor.contact_info}</td>
 						<td>{doctor.education}</td>
 						<td>
 							<Button 
@@ -157,7 +174,7 @@ const Doctor = () => {
 	
 							<Button 
 								variant='danger'
-								onClick={() => deleteDoctor(doctor.id_doctor)}
+								onClick={() => deleteDoctor(doctor.idDoctor)}
 							>Delete</Button>
 						</td>
 					</tr>
@@ -187,7 +204,7 @@ const Doctor = () => {
 						</Form.Group>
 						<Form.Group>
 							<Form.Label>Contact Information</Form.Label>
-							<Form.Control name="contact-info" value={formData.contactInfo} onChange={handleChange} required/>				
+							<Form.Control name="contact_info" value={formData.contact_info} onChange={handleChange} required/>				
 						<Form.Group>
 						</Form.Group>
 							<Form.Label>Education</Form.Label>

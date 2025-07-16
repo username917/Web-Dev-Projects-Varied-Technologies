@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,7 +47,7 @@ public class DoctorController {
 	            dto.setLast_name(doc.getLast_name()); // corrected field
 	            dto.setSpecialty(doc.getSpecialty());
 	            dto.setAvailability(doc.getAvailability());
-	            dto.setContactInfo(doc.getContact_info());
+	            dto.setContact_info(doc.getContact_info());
 	            dto.setEducation(doc.getEducation());
 	            return dto;
 	        })
@@ -55,7 +56,7 @@ public class DoctorController {
 	    return ResponseEntity.ok(dtoList);
 	}
 
-	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/add-doctor")
 	public ResponseEntity<Doctor> addDoctor(@RequestBody Doctor doctor) {
 		
@@ -64,6 +65,7 @@ public class DoctorController {
 		return new ResponseEntity<>(doc, HttpStatus.CREATED);
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("edit-doctor")
 	public ResponseEntity<Doctor> editDoctor(@RequestParam("idDoctor") Integer idDoctor, @RequestBody DoctorDTO docDTO) {
 		
@@ -80,13 +82,14 @@ public class DoctorController {
 		return ResponseEntity.ok(doctor);
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/remove-doctor")
-	public ResponseEntity<?> removeDoctor(@RequestParam("idDoctor") Integer idDoctor) {
+	public ResponseEntity<?> removeDoctor(@RequestParam("id_doctor") Integer id_doctor) {
 		
-		boolean deleted = docService.removeDoctor(idDoctor);
+		boolean deleted = docService.removeDoctor(id_doctor);
 		
 		if (deleted) {
-			return ResponseEntity.ok("Docor has been removed successfully");
+			return ResponseEntity.ok("Doctor has been removed successfully");
 		} else {
 			return ResponseEntity.notFound().build();
 		}

@@ -14,7 +14,7 @@ public class DoctorDTO {
 	
 	private String availability;
 	
-	private String contactInfo;
+	private String contact_info;
 	
 	private String education;
 
@@ -58,12 +58,12 @@ public class DoctorDTO {
 		this.availability = availability;
 	}
 
-	public String getContactInfo() {
-		return contactInfo;
+	public String getContact_info() {
+		return contact_info;
 	}
 
-	public void setContactInfo(String contactInfo) {
-		this.contactInfo = contactInfo;
+	public void setContact_info(String contact_info) {
+		this.contact_info = contact_info;
 	}
 
 	public String getEducation() {
@@ -81,14 +81,14 @@ public class DoctorDTO {
 	}
 
 	public DoctorDTO(int idDoctor, String first_name, String last_name, String specialty, String availability,
-			String contactInfo, String education) {
+			String contact_info, String education) {
 		super();
 		this.idDoctor = idDoctor;
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.specialty = specialty;
 		this.availability = availability;
-		this.contactInfo = contactInfo;
+		this.contact_info = contact_info;
 		this.education = education;
 	}
 	
