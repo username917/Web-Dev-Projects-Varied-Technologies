@@ -4,8 +4,22 @@
 
 import React, { useState } from 'react';
 import { Container, Row, Col, ListGroup } from 'react-bootstrap';
-import Doctor from "../Entities/Doctor.jsx";
 import Appointment from "../Entities/Appointment.jsx";
+import Billing from "../Entities/Billing.js";
+import Doctor from "../Entities/Doctor.jsx";
+import HealthRecords from "../Entities/HealthRecords.js";
+import LabResults from "../Entities/LabResults.js";
+import Patients from "../Entities/Patients.js";
+import Prescriptions from "../Entities/Prescriptions.js";
+import Reminders from "../Entities/Reminders.js";
+import Roles from "../Entities/Roles.js";
+import UserManagement from "../Entities/UserManagement.js";
+import Visitors from "../Entities/Visitors.js";
+import VitalSigns from "../Entities/VitlalSigns.js";
+
+
+import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
+import "../../styling/Administration.css"
 
 const Administration = () => {
 	
@@ -13,6 +27,9 @@ const Administration = () => {
 	
 	const renderContent = () => {
 		
+		// previous  version in commented code for reference; to be removed later.
+		
+		/*
 		switch (selectedMenu) {
 			
 			case "Doctors":
@@ -22,11 +39,48 @@ const Administration = () => {
 			default:
 				return null;
 		}
+		*/
 		
 	};
 	
 	return (
 		<div className="admin-dashboard">
+		
+			<Sidebar id="admin-sidebar">
+				<Menu>
+					
+					<MenuItem onClick={() => setSelectedMenu("Appointments")}>Appointments</MenuItem>
+					<MenuItem onClick={() => setSelectedMenu("Billing")}>Billing</MenuItem>
+					<MenuItem onClick={() => setSelectedMenu("Doctors")}>Doctors</MenuItem>
+					<MenuItem onClick={() => setSelectedMenu("Health Records")}>Health Records</MenuItem>
+					<MenuItem onClick={() => setSelectedMenu("Lab Results")}>Lab Results</MenuItem>
+					<MenuItem onClick={() => setSelectedMenu("Patients")}>Patients</MenuItem>
+					<MenuItem onClick={() => setSelectedMenu("Prescriptions")}>Prescriptions</MenuItem>
+					<MenuItem onClick={() => setSelectedMenu("Reminders")}>Reminders</MenuItem>
+					<MenuItem onClick={() => setSelectedMenu("Roles")}>Roles</MenuItem>
+					<MenuItem onClick={() => setSelectedMenu("Visitors")}>Visits</MenuItem>
+					<MenuItem onClick={() => setSelectedMenu("Vital Signs")}>Vital Signs</MenuItem>
+					<MenuItem onClick={() => setSelectedMenu("User Management")}>User Management</MenuItem>
+				</Menu>
+			</Sidebar>
+			
+			<div className="admin-content">
+				{selectedMenu === "Appointments" && <Appointment />}
+				{selectedMenu === "Billing" && < Billing/>}
+				{selectedMenu === "Doctors" && <Doctor />}
+				{selectedMenu === "Health Records" && < HealthRecords/>}
+				{selectedMenu === "Lab Results" && < LabResults/>}
+				{selectedMenu === "Patients" && < Patients/>}
+				{selectedMenu === "Prescriptions" && < Prescriptions/>}
+				{selectedMenu === "Reminders" && < Reminders/>}
+				{selectedMenu === "Roles" && < Roles/>}
+				{selectedMenu === "User Management" && < UserManagement/>}
+				{selectedMenu === "Visitors" && < Visitors/>}
+				{selectedMenu === "Vital Signs" && < VitalSigns/>}
+			
+			</div>
+		
+			{ /* 
 			<div className="sidebar">
 				<ListGroup variant="flush">
 					<ListGroup.Item
@@ -45,12 +99,13 @@ const Administration = () => {
 					</ListGroup.Item>
 				</ListGroup>
 			</div>
-			
+			*/}
 			<div className="main-content">
 				<div className="content=wrapper">
 					{renderContent()}
 				</div>
 			</div>
+			
 		
 		</div>
 		

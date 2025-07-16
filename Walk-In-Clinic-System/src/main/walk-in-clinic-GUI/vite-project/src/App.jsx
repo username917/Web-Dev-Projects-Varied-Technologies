@@ -13,7 +13,7 @@ function App() {
 	<BrowserRouter>
 	
 		<div>
-		  	<h1>Some routes here</h1>
+		  	{ /*<h1>Some routes here</h1> */ }
 			<Routes>
 				<Route path="/admin/login" element={<Login />}/>
 				<Route path="/administration" element={<Administration />}/>
