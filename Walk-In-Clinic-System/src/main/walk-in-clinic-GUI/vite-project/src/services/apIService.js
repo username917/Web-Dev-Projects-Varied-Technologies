@@ -133,8 +133,20 @@ const apiService = {
 			console.log("The error in deleting a doctor is: ", error);
 		}
 		
-	}
+	},
 	
+	// this function is going to retrieve the billing list
+	
+	async getBilingList() {
+		
+		try {
+			
+			return await axios.get(API_BASE_URL + "/get-billing-list")
+		} catch (error) {
+			
+			console.log("The error in retrieving the billing list is: ", error);
+		}
+	}
 }
 
 export default apiService;

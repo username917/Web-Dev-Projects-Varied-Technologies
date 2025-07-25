@@ -38,7 +38,7 @@ public class DoctorService {
 				.orElseThrow(() -> new RuntimeException("Doctor not found for queried id value."));
 	
 		existingDoctor.setAvailability(docDTO.getAvailability());
-		existingDoctor.setContact_info(docDTO.getContactInfo());
+		existingDoctor.setContact_info(docDTO.getContact_info());
 		existingDoctor.setEducation(docDTO.getEducation());
 		existingDoctor.setFirst_name(docDTO.getFirst_name());
 		existingDoctor.setLast_name(docDTO.getLast_name());

@@ -22,8 +22,8 @@ public class Billing {
 	@Column(name = "amount")
 	private double amount;
 	
-	@Column(name = "insuranceProvider")
-	private String insuranceProvider;
+	@Column(name = "insurancePolicy")
+	private String insurancePolicy;
 	
 	@Column(name = "paymentStatus")
 	private String paymentStatus;
@@ -52,12 +52,12 @@ public class Billing {
 		this.amount = amount;
 	}
 
-	public String getInsuranceProvider() {
-		return insuranceProvider;
+	public String getInsurancePolicy() {
+		return insurancePolicy;
 	}
 
-	public void setInsuranceProvider(String insuranceProvider) {
-		this.insuranceProvider = insuranceProvider;
+	public void setInsurancePolicy(String insurancePolicy) {
+		this.insurancePolicy = insurancePolicy;
 	}
 
 	public String getPaymentStatus() {
@@ -71,15 +71,15 @@ public class Billing {
 	@Override
 	public String toString() {
 		return "Billing [idBilling=" + idBilling + ", idVisit=" + idVisit + ", amount=" + amount
-				+ ", insuranceProvider=" + insuranceProvider + ", paymentStatus=" + paymentStatus + "]";
+				+ ", insurancePolicy=" + insurancePolicy + ", paymentStatus=" + paymentStatus + "]";
 	}
 
-	public Billing(int idBilling, int idVisit, double amount, String insuranceProvider, String paymentStatus) {
+	public Billing(int idBilling, int idVisit, double amount, String insurancePolicy, String paymentStatus) {
 		super();
 		this.idBilling = idBilling;
 		this.idVisit = idVisit;
 		this.amount = amount;
-		this.insuranceProvider = insuranceProvider;
+		this.insurancePolicy = insurancePolicy;
 		this.paymentStatus = paymentStatus;
 	}
 

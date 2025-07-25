@@ -54,18 +54,29 @@ const Login = () => {
 	
 	return (
 		
-		<div>
+		<div style={{
+			  display: 'flex',
+			  justifyContent: 'center',
+			  alignItems: 'center',
+			  flexDirection: 'column',
+			  minHeight: '100vh'
+		}}>
 			<Container className="mt-5">
 				<Row className="justify-content-md-center">
-					<Col md={4}>
-						<h2 className="text-center">Login</h2>
+					<Col md={12}>
+						<h2 
+							className="text-center"
+							>Login</h2>
 						{error && <Alert variant="danger">{error}</Alert>}
 						<Form onSubmit={(e) => {
 						  e.preventDefault();
 						  evaluateLogin();
 						}}>
 
-							<Form.Group controlId="formEmail" className="mb-3">
+							<Form.Group 
+								controlId="formEmail" 
+								className="mb-3"
+							>
 								<Form.Label>Email address</Form.Label>
 								<Form.Control
 									type="email"
@@ -73,6 +84,7 @@ const Login = () => {
 									value={username}
 									onChange={(e) => setUsername(e.target.value)}
 									required
+									
 								/>
 							</Form.Group>
 							
@@ -84,12 +96,13 @@ const Login = () => {
 									value={password}
 									onChange={(e) => setPassword(e.target.value)}
 									required
+									
 								/>
 							</Form.Group>
 							
 							<Button variant="primary" type="submit" className="w-100 mt-3">
 							    Login
-							  </Button>
+							 </Button>
 						</Form>
 					</Col>
 				</Row>

@@ -33,7 +33,6 @@ public class DoctorController {
 		return docService.getDoctorBySpecialty(specialty);
 		
 	}
-	
 
 	@GetMapping("/get-doctor-list")
 	public ResponseEntity<List<DoctorDTO>> getDoctorList() {
