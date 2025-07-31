@@ -110,6 +110,9 @@ const Billing = () => {
 			await apiService.createBilling(formData);
 		}
 		
+		setModalVisible(false);
+		recallBillinsgList();
+		
 	}
 	
 	// this function is going to handle changes to the Billing object
@@ -171,19 +174,19 @@ const Billing = () => {
 					<Modal.Body>
 						<Form.Group>
 							<Form.Label>Visit</Form.Label>
-							<Form.Control name="visit"></Form.Control>
+							<Form.Control name="visit" value={formData.visit} onChange={handleChange} required></Form.Control>
 						</Form.Group>
 						<Form.Group>
 							<Form.Label>Amount Owed</Form.Label>
-							<Form.Control name="amount"></Form.Control>
+							<Form.Control name="amount" value={formData.amount} onChange={handleChange} required></Form.Control>
 						</Form.Group>
 						<Form.Group>
 							<Form.Label>Insurance Policy</Form.Label>
-							<Form.Control name="insurance-policy"></Form.Control>
+							<Form.Control name="insurance-policy" value={formData.insurance_policy} onChange={handleChange} required></Form.Control>
 						</Form.Group>
 						<Form.Group>
 							<Form.Label>Payment Status</Form.Label>
-							<Form.Control name="payment-status"></Form.Control>
+							<Form.Control name="payment-status" value={formData.payment_status} onChange={handleChange} required></Form.Control>
 						</Form.Group>
 					</Modal.Body>
 					<Modal.Footer>
