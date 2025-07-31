@@ -66,7 +66,7 @@ const apiService = {
 		try {
 			
 			return await axios.put(API_BASE_URL + "/edit-doctor", formData, 			{
-				params: { idDoctor: formData.idDoctor }, // ✅ sends ?idDoctor=123 in UR
+				params: { idDoctor:  rmData.idDoctor }, // ✅ sends ?idDoctor=123 in UR
 				headers: {
 			    Authorization: `Bearer ${token}`
 			  }
@@ -77,7 +77,6 @@ const apiService = {
 			
 			console.log("The error in editing doctor is: ", error);
 		}
-		
 		
 	},
 	
@@ -102,7 +101,6 @@ const apiService = {
 			
 			console.log("The error in creating a doctor is: ", error)
 		}
-		
 		
 	},
 	
@@ -137,15 +135,101 @@ const apiService = {
 	
 	// this function is going to retrieve the billing list
 	
-	async getBilingList() {
+	async getBillingList() {
+		
+		const token = localStorage.getItem("token");
 		
 		try {
 			
-			return await axios.get(API_BASE_URL + "/get-billing-list")
+			return await axios.get(API_BASE_URL + "/get-billing-list", {
+			  headers: {
+			    Authorization: `Bearer ${token}`
+			  }
+			});
+			
 		} catch (error) {
 			
 			console.log("The error in retrieving the billing list is: ", error);
 		}
+	},
+	
+	async createBilling(formData) {
+		
+		console.log("The form data being submitted is: ", formData);
+				
+		const token = localStorage.getItem("token");
+		
+		try {
+			
+			return await axios.post(API_BASE_URL + "/add-billing", formData, {
+				
+				headers: {
+				    Authorization: `Bearer ${token}`
+  			    }
+				
+			});
+			
+			
+		} catch (error) {
+			
+			console.log("The error in creating a doctor is: ", error)
+		}
+
+		
+	},
+	
+	async editBilling() {
+		
+		const token = localStorage.getItem("token");
+				
+		try {
+			
+			return await axios.put(API_BASE_URL + "/edit-billing", formData, 			{
+				
+				params: { id_billing:  rmData.id_boctor }, // ✅ sends ?idDoctor=123 in UR
+				
+				headers: {
+					
+			    	Authorization: `Bearer ${token}`
+			  }
+			});
+			
+			
+		} catch (error) {
+			
+			console.log("The error in editing doctor is: ", error);
+		}
+		
+	},
+	
+	async deleteBilling(id_billing) {
+		
+		console.log("The id in trying to delete a billing is: ", id_billing);
+				
+		const token = localStorage.getItem("token");
+				
+		console.log("The content of token at deleting a billing  is: ", token);
+		
+		try {
+			
+			return await axios.delete(API_BASE_URL + "/remove-billing", {
+				
+				params: {
+					id_billing: id_billing
+				},
+				
+				headers: {
+				    Authorization: `Bearer ${token}`
+  			    }
+			});
+			
+			
+		} catch (error) {
+			
+			console.log("The error in deleting a billing is: ", error);
+		}
+				
+		
 	}
 }
 

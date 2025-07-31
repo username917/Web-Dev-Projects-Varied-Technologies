@@ -5,7 +5,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, ListGroup } from 'react-bootstrap';
 import Appointment from "../Entities/Appointment.jsx";
-import Billing from "../Entities/Billing.js";
+import Billing from "../Entities/Billing.jsx";
 import Doctor from "../Entities/Doctor.jsx";
 import HealthRecords from "../Entities/HealthRecords.js";
 import LabResults from "../Entities/LabResults.js";

@@ -72,8 +72,6 @@ const Doctor = () => {
 		setModalVisible(true);
 		
 	}
-		
-		
 	
 	// this function is going to handle the deletion of a doctor object.
 	
@@ -83,12 +81,10 @@ const Doctor = () => {
 		
 		await apiService.deleteDoctor(doctorid);
 		recallDoctorList();
-		
-		// I am making a change to my project.
-		
+
 	}
 	
-	// this functions handles the showing of the modal for the modal (?)
+	// this functions handles the showing of the modal for the addition of a new doctor
 	
 	const handleShowAdd = () => {
 		
@@ -126,7 +122,7 @@ const Doctor = () => {
 		recallDoctorList();
 	}
 	
-	// this function is going ot handle changes in the doctor object
+	// this function is going to handle changes in the doctor object
 	
 	const handleChange = (e) => {
 		
@@ -143,48 +139,48 @@ const Doctor = () => {
 		<div>
 			<h1>Doctors' Table</h1>
 			<br/>
-			<Button variant='primary' onClick={handleShowAdd}>Add New Doctor</Button>
+			<Button variant='primary' onClick={handleShowAdd}>Create New Doctor</Button>
 			<Table striped bordered hover>
-			<thead>
-				<tr>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Specialty</th>
-					<th>Availability</th>
-					<th>Contact Info</th>
-					<th>Education</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-			
-				{doctors.map(doctor => (
-					<tr key={doctor.id_doctor}>
-						<td>{doctor.first_name}</td>
-						<td>{doctor.last_name}</td>
-						<td>{doctor.specialty}</td>
-						<td>{doctor.availability}</td>
-						<td>{doctor.contact_info}</td>
-						<td>{doctor.education}</td>
-						<td>
-							<Button 
-								variant='warning'
-								onClick={() => editDoctor(doctor)} // pass whole doctor object for editing
-							>Modify</Button>
-	
-							<Button 
-								variant='danger'
-								onClick={() => deleteDoctor(doctor.idDoctor)}
-							>Delete</Button>
-						</td>
+				<thead>
+					<tr>
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>Specialty</th>
+						<th>Availability</th>
+						<th>Contact Info</th>
+						<th>Education</th>
+						<th>Actions</th>
 					</tr>
-				))}
-			</tbody>	
+				</thead>
+				<tbody>
+				
+					{doctors.map(doctor => (
+						<tr key={doctor.id_doctor}>
+							<td>{doctor.first_name}</td>
+							<td>{doctor.last_name}</td>
+							<td>{doctor.specialty}</td>
+							<td>{doctor.availability}</td>
+							<td>{doctor.contact_info}</td>
+							<td>{doctor.education}</td>
+							<td>
+								<Button 
+									variant='warning'
+									onClick={() => editDoctor(doctor)} // pass whole doctor object for editing
+								>Modify</Button>
+		
+								<Button 
+									variant='danger'
+									onClick={() => deleteDoctor(doctor.idDoctor)}
+								>Delete</Button>
+							</td>
+						</tr>
+					))}
+				</tbody>	
 			</Table>
 			
 			<Modal show={modalVisible} onHide={() => setModalVisible(false)}>
 				<Modal.Header closeButton>
-					<Modal.Title>{editingDoctor ? 'Edit Doctor' : 'Add Doctor'}</Modal.Title>
+					<Modal.Title>{editingDoctor ? 'Edit Current Doctor' : 'Create a New Doctor'}</Modal.Title>
 				</Modal.Header>
 				<Form onSubmit={handleSubmit}>
 					<Modal.Body>

@@ -13,19 +13,19 @@ public class Billing {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idBilling")
+	@Column(name = "id_billing")
 	private int idBilling;
 	
-	@Column(name = "idVisit")
+	@Column(name = "id_visit")
 	private int idVisit;
 	
 	@Column(name = "amount")
 	private double amount;
 	
-	@Column(name = "insurancePolicy")
+	@Column(name = "insurance_policy")
 	private String insurancePolicy;
 	
-	@Column(name = "paymentStatus")
+	@Column(name = "payment_status")
 	private String paymentStatus;
 
 	public int getIdBilling() {
