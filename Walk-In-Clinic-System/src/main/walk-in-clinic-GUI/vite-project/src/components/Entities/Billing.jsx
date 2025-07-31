@@ -101,6 +101,8 @@ const Billing = () => {
 	
 	const handleSubmit = async (e) => {
 		
+		e.preventDefault();
+		
 		if (editingBilling) {
 			
 			await apiService.editBilling(formData);
@@ -111,7 +113,7 @@ const Billing = () => {
 		}
 		
 		setModalVisible(false);
-		recallBillinsgList();
+		recallBillingsList();
 		
 	}
 	
