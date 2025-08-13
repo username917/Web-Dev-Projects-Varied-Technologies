@@ -13,17 +13,17 @@ public class Appointment {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idAppointmnent")
-	private int idAppointment;
+	@Column(name = "id_appointment")
+	private int id_appointment;
 	
-	@Column(name = "idPatient")
-	private int idPatient;
+	@Column(name = "id_patient")
+	private int id_patient;
 	
-	@Column(name = "idDoctor")
-	private int idDoctor;
+	@Column(name = "id_doctor")
+	private int id_doctor;
 	
-	@Column(name = "dateAppointment")
-	private String dateAppointment;
+	@Column(name = "date_appointment")
+	private String date_appointment;
 	
 	@Column(name = "status")
 	private String status;
@@ -31,36 +31,36 @@ public class Appointment {
 	@Column(name = "notes")
 	private String notes;
 
-	public int getIdAppointment() {
-		return idAppointment;
+	public int getId_appointment() {
+		return id_appointment;
 	}
 
-	public void setIdAppointment(int idAppointment) {
-		this.idAppointment = idAppointment;
+	public void setId_appointment(int id_appointment) {
+		this.id_appointment = id_appointment;
 	}
 
-	public int getIdPatient() {
-		return idPatient;
+	public int getId_patient() {
+		return id_patient;
 	}
 
-	public void setIdPatient(int idPatient) {
-		this.idPatient = idPatient;
+	public void setId_patient(int id_patient) {
+		this.id_patient = id_patient;
 	}
 
-	public int getIdDoctor() {
-		return idDoctor;
+	public int getId_doctor() {
+		return id_doctor;
 	}
 
-	public void setIdDoctor(int idDoctor) {
-		this.idDoctor = idDoctor;
+	public void setId_doctor(int id_doctor) {
+		this.id_doctor = id_doctor;
 	}
 
-	public String getDateAppointment() {
-		return dateAppointment;
+	public String getDate_appointment() {
+		return date_appointment;
 	}
 
-	public void setDateAppointment(String dateAppointment) {
-		this.dateAppointment = dateAppointment;
+	public void setDate_appointment(String date_appointment) {
+		this.date_appointment = date_appointment;
 	}
 
 	public String getStatus() {
@@ -79,28 +79,28 @@ public class Appointment {
 		this.notes = notes;
 	}
 
-	public Appointment(int idAppointment, int idPatient, int idDoctor, String dateAppointment, String status,
+	@Override
+	public String toString() {
+		return "Appointment [id_appointment=" + id_appointment + ", id_patient=" + id_patient + ", id_doctor="
+				+ id_doctor + ", date_appointment=" + date_appointment + ", status=" + status + ", notes=" + notes
+				+ "]";
+	}
+
+	private Appointment(int id_appointment, int id_patient, int id_doctor, String date_appointment, String status,
 			String notes) {
 		super();
-		this.idAppointment = idAppointment;
-		this.idPatient = idPatient;
-		this.idDoctor = idDoctor;
-		this.dateAppointment = dateAppointment;
+		this.id_appointment = id_appointment;
+		this.id_patient = id_patient;
+		this.id_doctor = id_doctor;
+		this.date_appointment = date_appointment;
 		this.status = status;
 		this.notes = notes;
 	}
 
-	@Override
-	public String toString() {
-		return "Appointment [idAppointment=" + idAppointment + ", idPatient=" + idPatient + ", idDoctor=" + idDoctor
-				+ ", dateAppointment=" + dateAppointment + ", status=" + status + ", notes=" + notes + "]";
-	}
-
-	public Appointment() {
+	private Appointment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 
 }

@@ -24,10 +24,17 @@ const apiService = {
 	
 	async getAppointments() {
 		
+		const token = localStorage.getItem("token");
+				
+		console.log("The content of token is: ", token);
+		
 		try {
 			
-			return await axios.get(API_BASE_URL + "/view-appointments")
-			
+			return await axios.get(API_BASE_URL + "/view-appointments"			, {
+			  headers: {
+			    Authorization: `Bearer ${token}`
+			  }
+			});
 			
 		} catch (error) {
 			
@@ -56,7 +63,6 @@ const apiService = {
 			console.log("The error in retrieving the doctor list is: ", error);
 		}
 		
-		
 	},
 	
 	async editDoctor(formData) {
@@ -71,7 +77,6 @@ const apiService = {
 			    Authorization: `Bearer ${token}`
 			  }
 			});
-			
 			
 		} catch (error) {
 			
@@ -95,7 +100,6 @@ const apiService = {
   			    }
 				
 			});
-			
 			
 		} catch (error) {
 			
@@ -124,7 +128,6 @@ const apiService = {
 				    Authorization: `Bearer ${token}`
   			    }
 			});
-			
 			
 		} catch (error) {
 			
@@ -161,7 +164,7 @@ const apiService = {
 		
 		try {
 			
-			return await axios.post(API_BASE_URL + "/add-billing", formData, {
+			return await axios.post(API_BASE_URL + "/book-billing", formData, {
 				
 				headers: {
 				    Authorization: `Bearer ${token}`
@@ -169,16 +172,14 @@ const apiService = {
 				
 			});
 			
-			
 		} catch (error) {
 			
 			console.log("The error in creating a doctor is: ", error)
 		}
 
-		
 	},
 	
-	async editBilling() {
+	async editBilling(formData) {
 		
 		const token = localStorage.getItem("token");
 				
@@ -186,14 +187,13 @@ const apiService = {
 			
 			return await axios.put(API_BASE_URL + "/edit-billing", formData, 			{
 				
-				params: { id_billing:  rmData.id_boctor }, // ✅ sends ?idDoctor=123 in UR
+				params: { id_billing:  formData.id_boctor }, // ✅ sends ?idDoctor=123 in UR
 				
 				headers: {
 					
 			    	Authorization: `Bearer ${token}`
 			  }
 			});
-			
 			
 		} catch (error) {
 			
@@ -223,14 +223,103 @@ const apiService = {
   			    }
 			});
 			
-			
 		} catch (error) {
 			
 			console.log("The error in deleting a billing is: ", error);
 		}
+			
+	},
+	
+	async deleteAppointment(id_appointment) {
+			
+		console.log("The id in trying to delete an appointment is: ", id_appointment);
 				
+		const token = localStorage.getItem("token");
+				
+		console.log("The content of token at deleting an appointment is: ", token);
 		
-	}
+		try {
+			
+			return await axios.delete(API_BASE_URL + "/delete-appointment", {
+				
+				params: {
+					id_appointment: id_appointment
+				},
+				
+				headers: {
+				    Authorization: `Bearer ${token}`
+  			    }
+			});
+			
+		} catch (error) {
+			
+			console.log("The error in deleting an appointment is: ", error);
+		}
+			
+	},
+	
+	async editAppointment(formData) {
+		
+		console.log("The contnet of formData at axios is: ", formData);
+		
+		const token = localStorage.getItem("token");
+						
+		try {
+			
+			return await axios.put(API_BASE_URL + "/update-appointment",
+			  
+				formData, // body
+			  {
+				
+			    headers: {
+					
+			      Authorization: `Bearer ${token}`,
+				  
+			    },
+				
+			    params: {
+					
+			      id_appointment: formData.id_appointment, // must match exactly
+			    
+			  } 
+			  }
+			);
+
+			
+		} catch (error) {
+			
+			console.log("The error in editing appointment is: ", error);
+		}
+		
+	},
+	
+	async createAppointment(formData) {
+		
+		console.log("The form data being submitted is: ", formData);
+						
+		const token = localStorage.getItem("token");
+		
+		try {
+			
+			return await axios.post(API_BASE_URL + "/book-appointment", formData, {
+				
+				headers: {
+				    Authorization: `Bearer ${token}`
+  			    }
+				
+			});
+			
+		} catch (error) {
+			
+			console.log("The error in creating an appointment is: ", error)
+		}
+		
+	},
+		
+		
+
+	
+	
 }
 
 export default apiService;

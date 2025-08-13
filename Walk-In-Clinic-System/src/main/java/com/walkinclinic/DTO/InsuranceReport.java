@@ -2,6 +2,7 @@ package com.walkinclinic.DTO;
 
 import java.util.Date;
 
+
 public class InsuranceReport {
 
 	String patient;

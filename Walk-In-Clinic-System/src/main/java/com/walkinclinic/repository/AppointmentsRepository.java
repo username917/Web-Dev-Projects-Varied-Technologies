@@ -16,7 +16,7 @@ public interface AppointmentsRepository extends JpaRepository<Appointment, Integ
 
 	@Modifying
 	@Transactional
-	@Query(value = "DELETE FROM appointments WHERE idAppointment = :idAppointment", nativeQuery = true)
-	int cancelAppointment(@Param("idAppointment") Integer idAppointment);
+	@Query(value = "DELETE FROM appointments WHERE id_appointment = :id_appointment", nativeQuery = true)
+	int cancelAppointment(@Param("id_appointment") Integer id_appointment);
 
 }

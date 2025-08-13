@@ -140,6 +140,7 @@ const Doctor = () => {
 			<h1>Doctors' Table</h1>
 			<br/>
 			<Button variant='primary' onClick={handleShowAdd}>Create New Doctor</Button>
+		 	<br/>
 			<Table striped bordered hover>
 				<thead>
 					<tr>

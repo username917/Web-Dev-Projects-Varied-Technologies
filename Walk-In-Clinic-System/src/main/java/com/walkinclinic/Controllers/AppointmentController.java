@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,6 +49,7 @@ public class AppointmentController {
 		
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/book-appointment")
 	public ResponseEntity<Appointment> bookAppointment(@RequestBody Appointment appointment) {
 		
@@ -56,23 +58,28 @@ public class AppointmentController {
 		return new ResponseEntity<>(appt, HttpStatus.CREATED);
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/update-appointment")
-	public ResponseEntity<Appointment> rescheduleAppointment(@RequestParam("idAppointment") Integer idAppointment, @RequestBody AppointmentDTO appointmentDTO) {
+	public ResponseEntity<Appointment> rescheduleAppointment(@RequestParam Integer id_appointment, @RequestBody AppointmentDTO appointmentDTO) {
 		
-		if (!idAppointment.equals(appointmentDTO.getIdAppointment())) {
+		System.out.println("The value of the dto being sent in is: " + appointmentDTO);
+	
+		
+		if (!id_appointment.equals(appointmentDTO.getId_appointment())) {
 			
 			return ResponseEntity.badRequest().build();
 			
 		}
-		Appointment appt = apptService.rescheduleAppointment(idAppointment, appointmentDTO);
+		Appointment appt = apptService.rescheduleAppointment(id_appointment, appointmentDTO);
 		
 		return ResponseEntity.ok(appt);
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/delete-appointment")
-	public ResponseEntity<?> deleteAppointment(@RequestParam("idAppointment") Integer idAppointment) {
+	public ResponseEntity<?> deleteAppointment(@RequestParam("id_appointment") Integer id_appointment) {
 		
-		boolean deleted = apptService.cancelAppointment(idAppointment);
+		boolean deleted = apptService.cancelAppointment(id_appointment);
 		
 		if (deleted) {
 			return ResponseEntity.ok("Appointment cancelled successfully!");

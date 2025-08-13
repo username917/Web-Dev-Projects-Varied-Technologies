@@ -36,16 +36,19 @@ public class AppointmentsService {
 	// reschedule appointment
 	
 	public Appointment rescheduleAppointment(Integer apptid, AppointmentDTO appointmentDTO) {
-		
-		Appointment existingAppt = apptRepo.findById(apptid)
-				.orElseThrow(() -> new RuntimeException("Appointment not found with specified id."));
-		
-		existingAppt.setDateAppointment(appointmentDTO.getDateAppointment());
-		
-		return apptRepo.save(existingAppt);
-		
-		
+
+	    Appointment existingAppt = apptRepo.findById(apptid)
+	            .orElseThrow(() -> new RuntimeException("Appointment not found with specified id."));
+
+	    existingAppt.setId_patient(appointmentDTO.getId_patient());
+	    existingAppt.setId_doctor(appointmentDTO.getId_doctor());
+	    existingAppt.setDate_appointment(appointmentDTO.getDate_appointment());
+	    existingAppt.setStatus(appointmentDTO.getStatus());
+	    existingAppt.setNotes(appointmentDTO.getNotes());
+
+	    return apptRepo.save(existingAppt);
 	}
+
 	
 	
 	// provide reason for appointment
@@ -61,9 +64,9 @@ public class AppointmentsService {
 	
 	// cancel appointment
 	
-	public boolean cancelAppointment(Integer idAppointment) {
+	public boolean cancelAppointment(Integer id_appointment) {
 		
-		int rowsDeleted = apptRepo.cancelAppointment(idAppointment);
+		int rowsDeleted = apptRepo.cancelAppointment(id_appointment);
 		
 		return rowsDeleted > 0;
 		

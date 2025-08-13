@@ -1,98 +1,91 @@
 package com.walkinclinic.DTO;
 
-import jakarta.persistence.Column;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AppointmentDTO {
 	
-	private int idAppointment;
+	@JsonProperty("id_appointment")	
+	private int id_appointment;
 	
+	@JsonProperty("id_patient")
+	private int id_patient;
 	
-	private int idPatient;
+	@JsonProperty("id_doctor")
+	private int id_doctor;
 	
-	
-	private int idDoctor;
-	
-	
-	private String dateAppointment;
-	
+	@JsonProperty("date_appointment")
+	private String date_appointment;
 	
 	private String status;
 	
-	
 	private String notes;
 
-
-	public int getIdAppointment() {
-		return idAppointment;
+	public int getId_appointment() {
+		return id_appointment;
 	}
 
-
-	public void setIdAppointment(int idAppointment) {
-		this.idAppointment = idAppointment;
+	public void setId_appointment(int id_appointment) {
+		this.id_appointment = id_appointment;
 	}
 
-
-	public int getIdPatient() {
-		return idPatient;
+	public int getId_patient() {
+		return id_patient;
 	}
 
-
-	public void setIdPatient(int idPatient) {
-		this.idPatient = idPatient;
+	public void setId_patient(int id_patient) {
+		this.id_patient = id_patient;
 	}
 
-
-	public int getIdDoctor() {
-		return idDoctor;
+	public int getId_doctor() {
+		return id_doctor;
 	}
 
-
-	public void setIdDoctor(int idDoctor) {
-		this.idDoctor = idDoctor;
+	public void setId_doctor(int id_doctor) {
+		this.id_doctor = id_doctor;
 	}
 
-
-	public String getDateAppointment() {
-		return dateAppointment;
+	public String getDate_appointment() {
+		return date_appointment;
 	}
 
-
-	public void setDateAppointment(String dateAppointment) {
-		this.dateAppointment = dateAppointment;
+	public void setDate_appointment(String date_appointment) {
+		this.date_appointment = date_appointment;
 	}
-
 
 	public String getStatus() {
 		return status;
 	}
 
-
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
 
 	public String getNotes() {
 		return notes;
 	}
 
-
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
 
-
-	private AppointmentDTO(int idAppointment, int idPatient, int idDoctor, String dateAppointment, String status,
+	private AppointmentDTO(int id_appointment, int id_patient, int id_doctor, String date_appointment, String status,
 			String notes) {
 		super();
-		this.idAppointment = idAppointment;
-		this.idPatient = idPatient;
-		this.idDoctor = idDoctor;
-		this.dateAppointment = dateAppointment;
+		this.id_appointment = id_appointment;
+		this.id_patient = id_patient;
+		this.id_doctor = id_doctor;
+		this.date_appointment = date_appointment;
 		this.status = status;
 		this.notes = notes;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return "AppointmentDTO [id_appointment=" + id_appointment + ", id_patient=" + id_patient + ", id_doctor="
+				+ id_doctor + ", date_appointment=" + date_appointment + ", status=" + status + ", notes=" + notes
+				+ "]";
+	}
+
+	
+	
 }
