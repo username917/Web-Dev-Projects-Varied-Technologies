@@ -13,16 +13,16 @@ public class HealthRecord {
 
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		@Column(name = "idHealthRecord")
+		@Column(name = "id_health_record")
 		private int idHealthRecord;
 		
-		@Column(name = "idPatient")
+		@Column(name = "id_patient")
 		private int idPatient;
 		
-		@Column(name = "idVisit")
+		@Column(name = "id_visit")
 		private int idVisit;
 		
-		@Column(name = "recordDate")
+		@Column(name = "record_date")
 		private String reocrdDate;
 		
 		@Column(name = "summary")
@@ -31,7 +31,7 @@ public class HealthRecord {
 		@Column(name = "notes")
 		private String notes;
 		
-		@Column(name = "createdBy")
+		@Column(name = "created_by")
 		private int createdBy;
 
 		public int getIdHealthRecord() {
