@@ -65,7 +65,7 @@ public class DoctorController {
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PutMapping("edit-doctor")
+	@PutMapping("/edit-doctor")
 	public ResponseEntity<Doctor> editDoctor(@RequestParam("idDoctor") Integer idDoctor, @RequestBody DoctorDTO docDTO) {
 		
 		System.out.println("Editing doctor...");

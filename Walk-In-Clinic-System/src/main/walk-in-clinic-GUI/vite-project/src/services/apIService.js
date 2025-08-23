@@ -316,10 +316,106 @@ const apiService = {
 		
 	},
 		
+	async getHealthRecords() {
 		
+		const token = localStorage.getItem("token");
+		
+		try {
+			
+			return await axios.get(API_BASE_URL + "/get-health-records", {
+			  headers: {
+			    Authorization: `Bearer ${token}`
+			  }
+			});
+			
+		} catch (error) {
+			
+			console.log("The error in retrieving health records is: ", error);
+		}
+	},
+	
+	async deleteHealthRecord(id_health_record) {
+		
+		console.log("The id in trying to delete a health record is: ", id_health_record);
+						
+		const token = localStorage.getItem("token");
+				
+		console.log("The content of token at deleting a health record is: ", token);
+		
+		try {
+			
+			return await axios.delete(API_BASE_URL + "/delete-health-record", {
+				
+				params: {
+					id_health_record: id_health_record
+				},
+				
+				headers: {
+				    Authorization: `Bearer ${token}`
+  			    }
+			});
+			
+		} catch (error) {
+			
+			console.log("The error in deleting a health record is: ", error);
+		}
+	},
+	
+	async editHealthRecord(formData) {
+		
+		console.log("The content of formData for health records at axios is: ", formData);
+				
+		const token = localStorage.getItem("token");
+						
+		try {
+			
+			return await axios.put(API_BASE_URL + "/update-health-record",
+			  
+				formData, // body
+			  {
+				
+			    headers: {
+					
+			      Authorization: `Bearer ${token}`,
+				  
+			    },
+				
+			    params: {
+					
+			      id_health_record: formData.id_health_record, // must match exactly
+			    
+			  } 
+			  }
+			);
 
+			
+		} catch (error) {
+			
+			console.log("The error in editing health record is: ", error);
+		}
+	},
 	
-	
+	async createHealthRecord(formData) {
+		
+		console.log("The form data being submitted for the creation of a health record is: ", formData);
+								
+		const token = localStorage.getItem("token");
+		
+		try {
+			
+			return await axios.post(API_BASE_URL + "/create-health-record", formData, {
+				
+				headers: {
+				    Authorization: `Bearer ${token}`
+  			    }
+				
+			});
+			
+		} catch (error) {
+			
+			console.log("The error in creating a health record is: ", error)
+		}
+	}
 }
 
 export default apiService;

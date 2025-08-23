@@ -1,6 +1,10 @@
 /**
  * this component is going to contain all details regarding Health Records for the project
  */
+import React, { useState, useEffect } from 'react';
+import apiService from "../../services/apiService";
+import { Table, Button, Modal, Form } from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const HealthRecords = () => {
 	
@@ -36,6 +40,7 @@ const HealthRecords = () => {
 				
 				const healthRecords = respHealthRecords.data;
 				setHealthRecords(healthRecords);
+				
 			} else {
 				
 				console.log("No health records have been found");
@@ -54,7 +59,7 @@ const HealthRecords = () => {
 		
 		setEditingHealthRecord(healthRecord);
 		setFormData(healthRecord);
-		setModalVisible(false);
+		setModalVisible(true);
 		
 		console.log("Editing health record wiht id: ", healthRecord);
 	}
@@ -69,11 +74,11 @@ const HealthRecords = () => {
 	
 	// this function is going to handle the deletion of a health record
 	
-	const deleteHealthRecord = async(healthRecord) => {
+	const deleteHealthRecord = async(id_health_record) => {
 		
-		console.log("Deleting health record with id: ", healthRecord.id_health_record);
+		console.log("Deleting health record with id: ", id_health_record);
 		
-		await apiService.deleteHealthRecord(healthRecord.id_heatlh_record);
+		await apiService.deleteHealthRecord(id_health_record);
 		readHealthRecords();
 	}
 	
@@ -108,7 +113,7 @@ const HealthRecords = () => {
 			
 		} else {
 			
-			await userService.createHealthRecord(formData);
+			await apiService.createHealthRecord(formData);
 			
 		}
 		
@@ -132,7 +137,7 @@ const HealthRecords = () => {
 		
 		<>
 			<h3>Health Records</h3>
-			<Button variant="primary" onClick={handleShowAdd}></Button>
+			<Button variant="primary" onClick={handleShowAdd}>Create New Health Record</Button>
 			<br/>
 			<Table striped bordered hover>
 				<thead>
@@ -144,81 +149,75 @@ const HealthRecords = () => {
 						<th>Summary</th>
 						<th>Notes</th>
 						<th>Created By</th>
+						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
-					{healthRecords.map(record => (
-						<tr key={record.id_health_record}>
-							<td>{record.id_patient}</td>
-							<td>{record.id_visit}</td>
-							<td>{record.record_date}</td>
-							<td>{record.summary}</td>
-							<td>{record.notes}</td>
-							<td>{record.created_by}</td>
-							<td>
-								<Button
-									variant="warning"
-									size="sm" className="ms-2"
-									onClick={() => editHealthRecord(record)}
-								>
-									Edit
-								</Button>
-								<Button
-									variant="danger"
-									size="sm"
-									onClick={() => deleteHealthRecord(record)}
-								>
-									Delete
-								</Button>
-							</td>
-						</tr>
-					))}
+				  {healthRecords.map(record => (
+				    <tr key={record.id_health_record}>
+				      <td>{record.id_health_record}</td>      {/* ✅ Fix here */}
+				      <td>{record.id_patient}</td>
+				      <td>{record.id_visit}</td>
+				      <td>{record.record_date}</td>
+				      <td>{record.summary}</td>
+				      <td>{record.notes}</td>
+				      <td>{record.created_by}</td>
+				      <td>
+				        <Button
+				          variant="warning"
+				          size="sm" className="ms-2"
+				          onClick={() => editHealthRecord(record)}
+				        >
+				          Edit
+				        </Button>
+				        <Button
+				          variant="danger"
+				          size="sm"
+				          onClick={() => deleteHealthRecord(record.id_health_record)}
+				        >
+				          Delete
+				        </Button>
+				      </td>
+				    </tr>
+				  ))}
 				</tbody>
+
 			</Table>
 			
-			{/*
-				
-				id_patient: "",
-							id_visit: "",
-							record_date: "",
-							summary: "",
-							notes: "",
-							created_by: ""
-			*/}
 			<Modal show={modalVisible} onHide={() => setModalVisible(false)}>
-				<Moda.Header closeButton>
+				<Modal.Header closeButton>
 					<Modal.Title>{editingHealthRecord ? "Edit Health Record" : "Create New Health Record"}</Modal.Title>
-				</Moda.Header>
+				</Modal.Header>
 				<Form onSubmit={handleSubmit}>
 					<Modal.Body>
 						<Form.Group>
-							<Form.Label></Form.Label>
+							<Form.Label>Patient ID</Form.Label>
 							<Form.Control name="id_patient" value={formData.id_patient} onChange={handleChange} required></Form.Control>
 						</Form.Group>
 						<Form.Group>
-							<Form.Label></Form.Label>
+							<Form.Label>Visit ID</Form.Label>
 							<Form.Control name="id_visit" value={formData.id_visit} onChange={handleChange} required></Form.Control>
 						</Form.Group>
 						<Form.Group>
-							<Form.Label></Form.Label>
+							<Form.Label>Record Date</Form.Label>
 							<Form.Control name="record_date" value={formData.record_date} onChange={handleChange} required></Form.Control>
 						</Form.Group>
 						<Form.Group>
-							<Form.Label></Form.Label>
+							<Form.Label>Summary</Form.Label>
 							<Form.Control name="summary" value={formData.summary} onChange={handleChange} required></Form.Control>
 						</Form.Group>
 						<Form.Group>
-							<Form.Label></Form.Label>
-							<Form.Control name="notes" value={notes} onChange={handleChange} required></Form.Control>
+							<Form.Label>Notes</Form.Label>
+							<Form.Control name="notes" value={formData.notes} onChange={handleChange} required></Form.Control>
 						</Form.Group>
 						<Form.Group>
-							<Form.Label></Form.Label>
+							<Form.Label>Created By</Form.Label>
 							<Form.Control name="created_by" value={formData.created_by} onChange={handleChange} required></Form.Control>
 						</Form.Group>
 					</Modal.Body>
 					<Modal.Footer>
 						<Button variant="primary" onClick={() => setModalVisible(false)}>Cancel</Button>
-						<Button variant="secondary" type="submit">{editingAppt ? 'Update' : 'Add'}</Button>
+						<Button variant="secondary" type="submit">{editingHealthRecord ? 'Update' : 'Add'}</Button>
 					</Modal.Footer>
 				</Form>
 			</Modal>
