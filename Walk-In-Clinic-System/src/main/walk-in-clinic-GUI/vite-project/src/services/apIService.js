@@ -281,7 +281,7 @@ const apiService = {
 					
 			      id_appointment: formData.id_appointment, // must match exactly
 			    
-			  } 
+			  	} 
 			  }
 			);
 
@@ -384,11 +384,10 @@ const apiService = {
 					
 			      id_health_record: formData.id_health_record, // must match exactly
 			    
-			  } 
+			  	} 
 			  }
 			);
-
-			
+	
 		} catch (error) {
 			
 			console.log("The error in editing health record is: ", error);
@@ -415,7 +414,108 @@ const apiService = {
 			
 			console.log("The error in creating a health record is: ", error)
 		}
-	}
+	},
+	
+	async getLabResults() {
+			
+		const token = localStorage.getItem("token");
+		
+		try {
+			
+			return await axios.get(API_BASE_URL + "/get-lab-results", {
+			  headers: {
+			    Authorization: `Bearer ${token}`
+			  }
+			});
+			
+		} catch (error) {
+			
+			console.log("The error in retrieving lab results is: ", error);
+		}
+	},
+	
+	async deleteLabResult(id_lab_result) {
+			
+		console.log("The id in trying to delete a health record lab result is: ", id_lab_result);
+						
+		const token = localStorage.getItem("token");
+				
+		console.log("The content of token at deleting a lab result is: ", token);
+		
+		try {
+			
+			return await axios.delete(API_BASE_URL + "/delete-lab_result", {
+				
+				params: {
+					id_lab_result: id_lab_result
+				},
+				
+				headers: {
+				    Authorization: `Bearer ${token}`
+  			    }
+			});
+			
+		} catch (error) {
+			
+			console.log("The error in deleting a lab result is: ", error);
+		}
+	},
+	
+	async editLabResult(formData) {
+			
+		console.log("The content of formData for lab results at axios is: ", formData);
+				
+		const token = localStorage.getItem("token");
+						
+		try {
+			
+			return await axios.put(API_BASE_URL + "/update-lab_result",
+			  
+				formData, // body
+			  {
+				
+			    headers: {
+					
+			      Authorization: `Bearer ${token}`,
+				  
+			    },
+				
+			    params: {
+					
+			      id_lab_result: formData.id_lab_result, // must match exactly
+			    
+			  	} 
+			  }
+			);
+
+		} catch (error) {
+			
+			console.log("The error in editing a lab result is: ", error);
+		}
+	},
+	
+	async createLabResult(formData) {
+			
+			console.log("The form data being submitted for the creation of a lab result is: ", formData);
+									
+			const token = localStorage.getItem("token");
+			
+			try {
+				
+				return await axios.post(API_BASE_URL + "/create-lab-result", formData, {
+					
+					headers: {
+					    Authorization: `Bearer ${token}`
+	  			    }
+					
+				});
+				
+			} catch (error) {
+				
+				console.log("The error in creating a lab result is: ", error)
+			}
+		},
+		
 }
 
 export default apiService;

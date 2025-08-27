@@ -121,7 +121,7 @@ const HealthRecords = () => {
 		readHealthRecords();
 	}
 	
-	// this function will handle changing events in the frontend element of the Health Record appointment
+	// this function will handle changing events in the frontend element of the Health Record 
 	
 	const handleChange = (e) => {
 		
