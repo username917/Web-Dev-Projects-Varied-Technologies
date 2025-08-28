@@ -34,7 +34,8 @@ public class HealthRecordController {
 		
 		if (healthRecordHistory.isEmpty()) {
 			
-			return ResponseEntity.noContent().build();		}
+			return ResponseEntity.noContent().build();		
+		}
 		
 		return ResponseEntity.ok(healthRecordHistory);
 		
