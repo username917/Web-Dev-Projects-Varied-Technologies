@@ -444,10 +444,10 @@ const apiService = {
 		
 		try {
 			
-			return await axios.delete(API_BASE_URL + "/delete-lab_result", {
+			return await axios.delete(API_BASE_URL + "/delete-lab-result", {
 				
 				params: {
-					id_lab_result: id_lab_result
+					id_lab_result: parseInt(id_lab_result)
 				},
 				
 				headers: {
@@ -469,24 +469,10 @@ const apiService = {
 						
 		try {
 			
-			return await axios.put(API_BASE_URL + "/update-lab_result",
-			  
-				formData, // body
-			  {
-				
-			    headers: {
-					
-			      Authorization: `Bearer ${token}`,
-				  
-			    },
-				
-			    params: {
-					
-			      id_lab_result: formData.id_lab_result, // must match exactly
-			    
-			  	} 
-			  }
-			);
+			return await axios.put(`${API_BASE_URL}/update-lab-result`, formData, {
+			  headers: { Authorization: `Bearer ${token}` },
+			  params: { id_lab_result: formData.id_lab_result }
+			});
 
 		} catch (error) {
 			

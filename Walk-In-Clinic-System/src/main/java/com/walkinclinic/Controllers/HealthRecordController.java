@@ -59,7 +59,7 @@ public class HealthRecordController {
 	public ResponseEntity<HealthRecord> editHealthRecord(@RequestParam("id_health_record") Integer id_health_record, @RequestBody HealthRecordDTO healthRecordDTO) {
 		
 		System.out.println("Editing heatlh record...");
-		;
+		
 		if (!id_health_record.equals(healthRecordDTO.getId_health_record())) {
 			return ResponseEntity.badRequest().build();
 		}

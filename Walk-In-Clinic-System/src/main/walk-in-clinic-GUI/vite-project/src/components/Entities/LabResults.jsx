@@ -35,7 +35,7 @@ const LabResults = () => {
 		try {
 			
 			const respLabResults = await apiService.getLabResults();
-			console.log("The response from the API service for ka bresults is: ", respLabResults.data);
+			console.log("The response from the API service for lab results is: ", respLabResults.data);
 			
 			if (Array.isArray(respLabResults.data)) {
 				
@@ -82,8 +82,9 @@ const LabResults = () => {
 		
 		console.log("Deleting lab result wiht id: ", id_lab_result);
 		
-		await apiService.deleteLabRecord(id_lab_result);
-		readLabResults();
+		await apiService.deleteLabResult(id_lab_result);
+		setLabResults([]);
+		await readLabResults();
 	}
 	
 	// this function is going to handle the showing of the modal
@@ -192,33 +193,33 @@ const LabResults = () => {
 				<Form onSubmit={handleSubmit}>
 					<Modal.Body>
 						<Form.Group>
-							<Form.Label></Form.Label>
-							<Form.Control name="id_visit" value={formData.id_lab_result} onChange={handleChange} required />
+							<Form.Label>Viist ID</Form.Label>
+							<Form.Control name="id_visit" value={formData.id_visit} onChange={handleChange} required />
 						</Form.Group>
 						<Form.Group>
-							<Form.Label></Form.Label>
+							<Form.Label>Test Type</Form.Label>
 							<Form.Control name="test_type" value={formData.test_type} onChange={handleChange} required />
 						</Form.Group>
 						<Form.Group>
-							<Form.Label></Form.Label>	
+							<Form.Label>Result</Form.Label>	
 							<Form.Control name="result" value={formData.result} onChange={handleChange} required />			
 						</Form.Group>
 						<Form.Group>
-							<Form.Label></Form.Label>
+							<Form.Label>Units</Form.Label>
 							<Form.Control name="units" value={formData.units} onChange={handleChange} required />
 						</Form.Group>
 						<Form.Group>
-							<Form.Label></Form.Label>	
+							<Form.Label>Normal Range</Form.Label>	
 							<Form.Control name="normal_range" value={formData.normal_range} onChange={handleChange} required />
 						</Form.Group>
 						<Form.Group>
-							<Form.Label></Form.Label>
+							<Form.Label>Date Conducted</Form.Label>
 							<Form.Control name="date_conducted" value={formData.date_conducted} onChange={handleChange} required />				
 						</Form.Group>
 					</Modal.Body>
 					<Modal.Footer>
 						<Button variant="primary" onClick={() => setModalVisible(false)}>Cancel</Button>
-						<Button variany="secondary" type="submit">{editingLaResult ? 'Update' : 'Add'}</Button>
+						<Button variant="secondary" type="submit">{editingLaResult ? 'Update' : 'Add'}</Button>
 					</Modal.Footer>
 				</Form>
 			</Modal>

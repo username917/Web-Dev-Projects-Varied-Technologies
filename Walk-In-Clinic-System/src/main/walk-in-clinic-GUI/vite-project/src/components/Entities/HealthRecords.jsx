@@ -79,6 +79,7 @@ const HealthRecords = () => {
 		console.log("Deleting health record with id: ", id_health_record);
 		
 		await apiService.deleteHealthRecord(id_health_record);
+		setHealthRecords([]);
 		readHealthRecords();
 	}
 	

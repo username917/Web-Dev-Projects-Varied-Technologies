@@ -8,7 +8,7 @@ import Appointment from "../Entities/Appointment.jsx";
 import Billing from "../Entities/Billing.jsx";
 import Doctor from "../Entities/Doctor.jsx";
 import HealthRecords from "../Entities/HealthRecords.jsx";
-import LabResults from "../Entities/LabResults.js";
+import LabResults from "../Entities/LabResults.jsx";
 import Patients from "../Entities/Patients.js";
 import Prescriptions from "../Entities/Prescriptions.js";
 import Reminders from "../Entities/Reminders.js";
