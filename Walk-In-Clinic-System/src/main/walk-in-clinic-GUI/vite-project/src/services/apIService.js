@@ -482,26 +482,84 @@ const apiService = {
 	
 	async createLabResult(formData) {
 			
-			console.log("The form data being submitted for the creation of a lab result is: ", formData);
-									
-			const token = localStorage.getItem("token");
-			
-			try {
-				
-				return await axios.post(API_BASE_URL + "/create-lab-result", formData, {
-					
-					headers: {
-					    Authorization: `Bearer ${token}`
-	  			    }
-					
-				});
-				
-			} catch (error) {
-				
-				console.log("The error in creating a lab result is: ", error)
-			}
-		},
+		console.log("The form data being submitted for the creation of a lab result is: ", formData);
+								
+		const token = localStorage.getItem("token");
 		
+		try {
+			
+			return await axios.post(API_BASE_URL + "/create-lab-result", formData, {
+				
+				headers: {
+				    Authorization: `Bearer ${token}`
+  			    }
+				
+			});
+			
+		} catch (error) {
+			
+			console.log("The error in creating a lab result is: ", error)
+		}
+	},
+	
+	async getPatientRecords() {
+				
+		const token = localStorage.getItem("token");
+		
+		try {
+			
+			return await axios.get(API_BASE_URL + "/get-patients", {
+			  headers: {
+			    Authorization: `Bearer ${token}`
+			  }
+			});
+			
+		} catch (error) {
+			
+			console.log("The error in retrieving patients is: ", error);
+		}
+	},
+	
+	async editPatientRecord(formData) {
+				
+		console.log("The content of formData for patient record at axios is: ", formData);
+				
+		const token = localStorage.getItem("token");
+						
+		try {
+			
+			return await axios.put(`${API_BASE_URL}/update-patient-record`, formData, {
+			  headers: { Authorization: `Bearer ${token}` },
+			  params: { id_patient: formData.id_patient }
+			});
+
+		} catch (error) {
+			
+			console.log("The error in editing a patient record is: ", error);
+		}
+	},
+	
+	async createPatientRecord(formData) {
+			
+		console.log("The form data being submitted for the creation of a patient record is: ", formData);
+								
+		const token = localStorage.getItem("token");
+		
+		try {
+			
+			return await axios.post(API_BASE_URL + "/create-patient-record", formData, {
+				
+				headers: {
+				    Authorization: `Bearer ${token}`
+  			    }
+				
+			});
+			
+		} catch (error) {
+			
+			console.log("The error in creating a patient record is: ", error)
+		}
+	},
 }
 
 export default apiService;

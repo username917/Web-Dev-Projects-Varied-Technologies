@@ -61,7 +61,7 @@ const HealthRecords = () => {
 		setFormData(healthRecord);
 		setModalVisible(true);
 		
-		console.log("Editing health record wiht id: ", healthRecord);
+		console.log("Editing health record with id: ", healthRecord);
 	}
 	
 	// this function is going to add a health record to the database
