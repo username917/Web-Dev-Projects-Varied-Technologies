@@ -4,6 +4,13 @@
 
 const Patients = () => {
 	
+	const [patients, setPatients] = useState([]);
+	const [editingPatinet, setEditingPatient] = useState([]);
+	
+	const [modalVisible, setModalVisible] = uesState(false);
+	
+	const [formData, setFormData]...
+	
 	
 }
 
