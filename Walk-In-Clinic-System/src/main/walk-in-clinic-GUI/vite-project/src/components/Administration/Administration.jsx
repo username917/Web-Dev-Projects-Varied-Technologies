@@ -9,7 +9,7 @@ import Billing from "../Entities/Billing.jsx";
 import Doctor from "../Entities/Doctor.jsx";
 import HealthRecords from "../Entities/HealthRecords.jsx";
 import LabResults from "../Entities/LabResults.jsx";
-import Patients from "../Entities/Patients.js";
+import Patients from "../Entities/Patients.jsx";
 import Prescriptions from "../Entities/Prescriptions.js";
 import Reminders from "../Entities/Reminders.js";
 import Roles from "../Entities/Roles.js";

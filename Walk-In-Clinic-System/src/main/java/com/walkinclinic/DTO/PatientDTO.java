@@ -1,53 +1,40 @@
-package com.walkinclinic.Models;
+package com.walkinclinic.DTO;
+
+import com.walkinclinic.Models.User;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
 
-@Entity
-@Table(name = "patients")
-public class Patient {
+public class PatientDTO {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_patient")
 	private Integer id_patient;
 	
-	@OneToOne
-	@JoinColumn(name = "user_id", referencedColumnName = "userid")
-    private User user;
-	
-	@Column(name = "first_name")
 	private String first_name;
 	
-	@Column(name = "last_name")
 	private String last_name;
 	
-	@Column(name = "date_of_birth")
 	private String date_of_birth;
 	
-	@Column(name = "gender")
 	private String gender;
 	
-	@Column(name = "phone")
 	private String phone;
 	
-	@Column(name = "email")
 	private String email;
 	
-	@Column(name = "address")
 	private String address;
 	
-	@Column(name = "emergency_contact_name")
 	private String emergency_contact_name;
 	
-	@Column(name = "emergency_contact_phone")
 	private String emergency_contact_phone;
+
+	@Override
+	public String toString() {
+		return "PatientDTO [id_patient=" + id_patient +  "first_name=" + first_name + ", last_name="
+				+ last_name + ", date_of_birth=" + date_of_birth + ", gender=" + gender + ", phone=" + phone
+				+ ", email=" + email + ", address=" + address + ", emergency_contact_name=" + emergency_contact_name
+				+ ", emergency_contact_phone=" + emergency_contact_phone + "]";
+	}
 
 	public int getId_patient() {
 		return id_patient;
@@ -57,13 +44,7 @@ public class Patient {
 		this.id_patient = id_patient;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
+	
 
 	public String getFirst_name() {
 		return first_name;
@@ -136,20 +117,13 @@ public class Patient {
 	public void setEmergency_contact_phone(String emergency_contact_phone) {
 		this.emergency_contact_phone = emergency_contact_phone;
 	}
-
-	@Override
-	public String toString() {
-		return "Patient [id_patient=" + id_patient + ", user=" + user + ", first_name=" + first_name + ", last_name="
-				+ last_name + ", date_of_birth=" + date_of_birth + ", gender=" + gender + ", phone=" + phone
-				+ ", email=" + email + ", address=" + address + ", emergency_contact_name=" + emergency_contact_name
-				+ ", emergency_contact_phone=" + emergency_contact_phone + "]";
-	}
-
-	private Patient(int id_patient, User user, String first_name, String last_name, String date_of_birth, String gender,
-			String phone, String email, String address, String emergency_contact_name, String emergency_contact_phone) {
+	
+	private PatientDTO(Integer id_patient, Integer user_id, String first_name, String last_name, String date_of_birth,
+			String gender, String phone, String email, String address, String emergency_contact_name,
+			String emergency_contact_phone) {
 		super();
 		this.id_patient = id_patient;
-		this.user = user;
+	
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.date_of_birth = date_of_birth;
@@ -161,10 +135,12 @@ public class Patient {
 		this.emergency_contact_phone = emergency_contact_phone;
 	}
 
-	public Patient() {
+	public void setId_patient(Integer id_patient) {
+		this.id_patient = id_patient;
+	}
+
+	PatientDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	
 }

@@ -508,7 +508,7 @@ const apiService = {
 		
 		try {
 			
-			return await axios.get(API_BASE_URL + "/get-patients", {
+			return await axios.get(API_BASE_URL + "/get-patient-records", {
 			  headers: {
 			    Authorization: `Bearer ${token}`
 			  }
@@ -538,6 +538,33 @@ const apiService = {
 			console.log("The error in editing a patient record is: ", error);
 		}
 	},
+	
+	async deletePatientRecord(id_patient) {
+				
+			console.log("The id in trying to delete a patient record is: ", id_patient);
+							
+			const token = localStorage.getItem("token");
+					
+			console.log("The content of token at deleting a patient record is: ", token);
+			
+			try {
+				
+				return await axios.delete(API_BASE_URL + "/delete-patient-record", {
+					
+					params: {
+						id_patient: parseInt(id_patient)
+					},
+					
+					headers: {
+					    Authorization: `Bearer ${token}`
+	  			    }
+				});
+				
+			} catch (error) {
+				
+				console.log("The error in deleting a patient record is: ", error);
+			}
+		},
 	
 	async createPatientRecord(formData) {
 			

@@ -40,7 +40,7 @@ public class User implements UserDetails {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "user_roles",
-			joinColumns = @JoinColumn(name = "userid"),
+			joinColumns = @JoinColumn(name = "user_id"),
 			inverseJoinColumns = @JoinColumn(name = "roleid"))
 	private Set<Role> roles = new HashSet<>();
 
@@ -49,6 +49,7 @@ public class User implements UserDetails {
 	private Doctor doctor;
 	
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonBackReference
 	private Patient patient;
 	
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
