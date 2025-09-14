@@ -13,14 +13,14 @@ public class Prescription {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name ="isPrescription")
-	private int idPrescription;
+	@Column(name ="id_prescription")
+	private int id_prescription;
 	
-	@Column(name = "idVisit")
-	private int idVisit;
+	@Column(name = "id_visit")
+	private int id_visit;
 	
-	@Column(name = "drugName")
-	private String drugName;
+	@Column(name = "drug_name")
+	private String drug_name;
 	
 	@Column(name = "dosage")
 	private String dosage;
