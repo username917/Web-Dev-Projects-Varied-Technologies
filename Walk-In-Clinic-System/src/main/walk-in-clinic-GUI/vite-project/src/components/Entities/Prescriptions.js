@@ -193,33 +193,37 @@ const Prescriptions = () => {
 				</tbody>
 			</Table>
 			
-			<Modal show={modalVisible} onhide={}>
-				<Modal.Header>
-					<Modal.Title></Modal.Title>
+			<Modal show={modalVisible} onhide={() => setModalVisible(fallse)}>
+				<Modal.Header closeButton>
+					<Modal.Title>{editingPrescription ? "Edit Prescription" : 'Create New Prescription'}</Modal.Title>
 				</Modal.Header>
-				<Form>
+				<Form onSubmit={handleSubmit}>
 					<Modal.Body>
 						<Form.Group>
-							<Form.Label></Form.Label>
-							<Form.Control></Form.Control>
+							<Form.Label>Drug Name</Form.Label>
+							<Form.Control name="drug_name" value={formData.drug_name} onChange={handleChange} required></Form.Control>
 						</Form.Group>
 						<Form.Group>
-							<Form.Label></Form.Label>
-							<Form.Control></Form.Control>
+							<Form.Label>Dosage</Form.Label>
+							<Form.Control name="dosage" value={formData.dosage} onChange={handleChange} required></Form.Control>
 						</Form.Group>
 						<Form.Group>
-							<Form.Label></Form.Label>
-							<Form.Control></Form.Control>
+							<Form.Label>Frequency</Form.Label>
+							<Form.Control name="frequency" value={formData.frequency} onChange={handleChange} required></Form.Control>
 						</Form.Group>
 						<Form.Group>
-							<Form.Label></Form.Label>
-							<Form.Control></Form.Control>
+							<Form.Label>Duration</Form.Label>
+							<Form.Control name="duration" value={formData.duration} onChange={handleChange} required></Form.Control>
 						</Form.Group>
 						<Form.Group>
-							<Form.Label></Form.Label>
-							<Form.Control></Form.Control>
+							<Form.Label>Notes</Form.Label>
+							<Form.Control name="notes" value={formData.notes} onChange={handleChange} required></Form.Control>
 						</Form.Group>
 					</Modal.Body>
+					<Modal.Footer>
+						<Button variant="primary" onClick={() => setModalVisible(false)}>Cancel</Button>
+						<Button variant="secondary" type="submit">{editingPrescription ? 'Update' : 'Add'}</Button>
+					</Modal.Footer>
 				</Form>
 			</Modal>
 		</>
