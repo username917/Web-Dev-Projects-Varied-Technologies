@@ -17,7 +17,7 @@ const Prescriptions = () => {
 	const [formData, setFormData] = useState({
 		id_prescription: '',
 		id_visit: '',
-		drug_name,
+		drug_name: '',
 		dosage: '',
 		frequency: '',
 		duration: '',
@@ -57,7 +57,7 @@ const Prescriptions = () => {
 		
 		setEditingPrescripion(prescription);
 		setFormData(prescription);
-		setModalVisible(rue);
+		setModalVisible(true);
 		
 	 	console.log("Editing prescription with id: ", prescription);
 	}
@@ -74,7 +74,7 @@ const Prescriptions = () => {
 	
 	const deletePrescription = async (id_prescription) => {
 		
-		console.log("Deleting prescriptio record with id: ", prescription);
+		console.log("Deleting prescriptio record with id: ", id_prescription);
 		
 		await apiService.deletePrescription(id_prescription);
 		
@@ -92,7 +92,7 @@ const Prescriptions = () => {
 		setFormData({
 			id_prescription: '',
 			id_visit: '',
-			drug_name,
+			drug_name: '',
 			dosage: '',
 			frequency: '',
 			duration: '',
@@ -176,7 +176,7 @@ const Prescriptions = () => {
 								<Button
 									variant="warning"
 									size="sm" className="ms-2"
-									onClick={() => editingPrescription(record)}
+									onClick={() => editPrescription(record)}
 								>
 									Edit
 								</Button>
@@ -193,7 +193,7 @@ const Prescriptions = () => {
 				</tbody>
 			</Table>
 			
-			<Modal show={modalVisible} onhide={() => setModalVisible(fallse)}>
+			<Modal show={modalVisible} onhide={() => setModalVisible(false)}>
 				<Modal.Header closeButton>
 					<Modal.Title>{editingPrescription ? "Edit Prescription" : 'Create New Prescription'}</Modal.Title>
 				</Modal.Header>
