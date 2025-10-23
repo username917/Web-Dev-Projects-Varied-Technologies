@@ -51,7 +51,7 @@ const Prescriptions = () => {
 		}
 	}
 	
-	// this function is gong to edit a prescription record 
+	// this function is going to edit a prescription record 
 	
 	const editPrescription = (prescription) => {
 		
@@ -74,7 +74,7 @@ const Prescriptions = () => {
 	
 	const deletePrescription = async (id_prescription) => {
 		
-		console.log("Deleting prescriptio record with id: ", id_prescription);
+		console.log("Deleting prescription record with id: ", id_prescription);
 		
 		await apiService.deletePrescription(id_prescription);
 		
@@ -83,7 +83,7 @@ const Prescriptions = () => {
 	
 	}
 	
-	// this function is going to handle the showing of hte modal
+	// this function is going to handle the showing of the modal
 	
 	const handleShowAdd = () => {
 		
@@ -105,7 +105,6 @@ const Prescriptions = () => {
 	// thsi function is going to handle the submission of a new or modified prescription record
 	
 	const handleSubmit = async (e) => {
-		
 		
 		e.preventDefault();
 		

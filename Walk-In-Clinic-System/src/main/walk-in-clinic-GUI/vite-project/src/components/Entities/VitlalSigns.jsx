@@ -61,9 +61,97 @@ const VitalSigns = () => {
 			console.log("The error in reading vital signs is: ", error);
 		}
 		
-		
 	}
 	
+	// this function is going to edit a vital signs record
+
+	const editVitalSignsRecord = (vitalSignsRecord) => {
+		
+		setEditingVitalSigns(vitalSignsRecord);
+		setFormData(vitalSignsRecord);
+		setModalVisible(true);
+		
+		console.log("Editing vital signs record with id: ", vitalSignsRecord);
+	}
+	
+	// this function is going to create a vital signs record
+	
+	const createVitalSignsRecord = () => {
+		
+		setFormData("");
+		setModalVisible(true);
+	}
+	
+	// this function is going to handle the deleteion of a vital signs record
+	
+	const deleteVitalSignsRecord = async (id_vital_signs_record) => {
+		
+		console.log("Deleting a vital signs record with: ", id_vital_signs_record);
+	
+		await apiService.deleteVitalSignsRecord(id_vital_signs_record);
+		
+		setVitalSigns([]);
+		readVitalSigns();
+	}
+	
+	// this function is going to handle the showing of the modal
+	
+	const handleShowAdd = () => {
+		
+		setEditingVitalSigns(null);
+		
+		setFormData({
+			id_vitals: '',
+			id_visit: '',
+			temperature: '',
+			blood_pressure: '',
+			heart_rate: '',
+			respiratory_rate: '',
+			weight: '',
+			height: ''
+		})
+		
+		createVitalSignsRecord();
+	}
+	
+	// this function is going to handle the submission of a new or modified vital signs record
+	
+	const handleSubmit = async (e) => {
+		
+		e.preventDefault();
+		
+		if (editingVitalSigns) {
+			
+			await apiService.editVitalSignsRecord(formData);
+		
+		} else {
+			
+			await apiService.createVitalSignsRecord(formData);
+		}
+		
+		setModalVisible(false);
+		readVitalSigns();
+	}
+	
+	// this function is going to handle changing events in the frontend element of the Vital Signs module
+	
+	const handleChange = (e) => {
+		
+		setFormData(prev => ({
+			
+			...prev,
+			[e.target.name]: e.target.value
+		}))
+	}
+	
+	return (
+	
+		<>
+			<h3>Vital Signs</h3>
+			<Button variant="primary" onClick={handleShowAdd}>Create New Vital Record</Button>
+			
+		</>
+	)
 }
 
 export default VitalSigns;
