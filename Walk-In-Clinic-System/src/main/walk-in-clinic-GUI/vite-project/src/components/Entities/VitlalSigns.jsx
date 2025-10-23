@@ -33,7 +33,36 @@ const VitalSigns = () => {
 		height: ''
 	})
 	
-
+	useEffect (() => {
+		readVitalSigns();
+	}, [])
+	
+	const readVitalSigns = async () => {
+		
+		try {
+			
+			const readVitalSigns = await apiService.getVitalSigns();
+			console.log("The response from the vital signs request is: ", readVitalSigns.data);
+			
+			if (Array.isArray(readVitalSigns.data)) {
+				
+				const vitalSigns = readVitalSigns.data;
+				setVitalSigns(vitalSigns);
+			} else {
+				
+				console.log("No vital signs data has been found");
+				
+				return;
+			}
+			
+			
+		} catch (error) {
+			
+			console.log("The error in reading vital signs is: ", error);
+		}
+		
+		
+	}
 	
 }
 
