@@ -144,12 +144,101 @@ const VitalSigns = () => {
 		}))
 	}
 	
+	/*
+		id_vitals: '',
+		id_visit: '',
+		temperature: '',
+		blood_pressure: '',
+		heart_rate: '',
+		respiratory_rate: '',
+		weight: '',
+		height: ''
+	*/
+	
 	return (
 	
 		<>
 			<h3>Vital Signs</h3>
 			<Button variant="primary" onClick={handleShowAdd}>Create New Vital Record</Button>
+			<br/>
+			<Table striped bordered hover>
+				<thead>
+					<tr>
+						<th>Vitals ID</th>
+						<th>Visit ID</th>
+						<th>Temperature</th>
+						<th>Blood Pressure</th>
+						<th>Heart Rate</th>
+						<th>Respiratory Rate</th>
+						<th>Weight</th>
+						<th>Height</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+					{vitalSigns.map(record => (
+						<tr key={record.id_vital_sign}>
+							<td>{record.id_visit}</td>
+							<td>{record.temperature}</td>
+							<td>{record.blood_pressure}</td>
+							<td>{record.heart_rate}</td>
+							<td>{record.respiratory_rate}</td>
+							<td>{record.weight}</td>
+							<td>{record.height}</td>
+							<td>
+								<Button
+									variant="warning"
+									size="sm" className="ms-2"
+									onClick={() => editVitalSignsRecord(record)}
+								>
+									Edit
+								</Button>
+								<Button
+									varinat="danger"
+									size="sm"
+									onClick={() => deleteVitalSignsRecord(record)}
+								>
+									Delete
+								</Button>
+							</td>
+						</tr>
+					))}
+			</Table>
 			
+			<Modal>
+				<Modal.Header>
+					<Modal.Title></Modal.Title>
+				</Modal.Header>
+				<Form>
+					<Modal.Body>
+						<Form.Group>
+							<Form.Label></Form.Label>
+							<Form.Control></Form.Control>
+						</Form.Group>
+							<Form.Label></Form.Label>
+							<Form.Control></Form.Control>
+						<Form.Group>
+							<Form.Label></Form.Label>
+							<Form.Control></Form.Control>
+						</Form.Group>
+							<Form.Label></Form.Label>
+							<Form.Control></Form.Control>
+						<Form.Group>
+							<Form.Label></Form.Label>
+							<Form.Control></Form.Control>
+						</Form.Group>
+						<Form.Group>
+							<Form.Label></Form.Label>
+							<Form.Control></Form.Control>
+						</Form.Group>
+					
+					</Modal.Body>
+					<Modal.Footer>
+						<Button></Button>
+						<Button></Button>
+					</Modal.Footer>
+				</Form>
+			</Modal>
 		</>
 	)
 }

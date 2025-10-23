@@ -181,7 +181,7 @@ const Prescriptions = () => {
 								</Button>
 								<Button
 									variant="danger"
-									siz="sm"
+									size="sm"
 									onClick={() => deletePrescription(record.id_prescription)}								
 								>
 									Delete
