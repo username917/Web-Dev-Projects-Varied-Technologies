@@ -205,37 +205,37 @@ const VitalSigns = () => {
 					))}
 			</Table>
 			
-			<Modal>
-				<Modal.Header>
-					<Modal.Title></Modal.Title>
+			<Modal show={modalVisible} onHide={() => setModalVisible(false)}>
+				<Modal.Header closeButton>
+					<Modal.Title>{editingVitalSigns ? "Edit Vital Signs Record" : "Create New Vital Signs Record"}</Modal.Title>
 				</Modal.Header>
-				<Form>
+				<Form onSubmit={handleSubmit}>
 					<Modal.Body>
 						<Form.Group>
-							<Form.Label></Form.Label>
-							<Form.Control></Form.Control>
+							<Form.Label>Temperature</Form.Label>
+							<Form.Control name="temperature" value={formData.temperature} onChange={handleChange} required></Form.Control>
 						</Form.Group>
-							<Form.Label></Form.Label>
-							<Form.Control></Form.Control>
+							<Form.Label>Blood Pressure</Form.Label>
+							<Form.Control name="blood_pressure" value={formData.blood_pressure} onChange={handleChange} required></Form.Control>
 						<Form.Group>
-							<Form.Label></Form.Label>
-							<Form.Control></Form.Control>
+							<Form.Label>Heart Rate</Form.Label>
+							<Form.Control nae="heart_rate" value={formData.heart_rate} onChange={handleChange} required></Form.Control>
 						</Form.Group>
-							<Form.Label></Form.Label>
-							<Form.Control></Form.Control>
+							<Form.Label>Respiratory Rate</Form.Label>
+							<Form.Control name="resp_rate" value={formData.respiratory_rate} onChange={handleChange} required></Form.Control>
 						<Form.Group>
-							<Form.Label></Form.Label>
-							<Form.Control></Form.Control>
+							<Form.Label>Weight</Form.Label>
+							<Form.Control name="weight" value={formData.weight} onChange={handleChange} required></Form.Control>
 						</Form.Group>
 						<Form.Group>
-							<Form.Label></Form.Label>
-							<Form.Control></Form.Control>
+							<Form.Label>Height</Form.Label>
+							<Form.Control name="height" value={formData.height} onChange={handleChange} required></Form.Control>
 						</Form.Group>
 					
 					</Modal.Body>
 					<Modal.Footer>
-						<Button></Button>
-						<Button></Button>
+						<Button variant="primary" onClick={() => setModalVisible(false)}>Cancel</Button>
+						<Button variant="secondary" type="submit">{editingVitalSigns ? "Update" : "Add"}</Button>
 					</Modal.Footer>
 				</Form>
 			</Modal>

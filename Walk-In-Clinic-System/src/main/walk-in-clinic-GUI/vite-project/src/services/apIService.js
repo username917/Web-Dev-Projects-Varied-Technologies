@@ -541,30 +541,30 @@ const apiService = {
 	
 	async deletePatientRecord(id_patient) {
 				
-			console.log("The id in trying to delete a patient record is: ", id_patient);
-							
-			const token = localStorage.getItem("token");
-					
-			console.log("The content of token at deleting a patient record is: ", token);
+		console.log("The id in trying to delete a patient record is: ", id_patient);
+						
+		const token = localStorage.getItem("token");
+				
+		console.log("The content of token at deleting a patient record is: ", token);
+		
+		try {
 			
-			try {
+			return await axios.delete(API_BASE_URL + "/delete-patient-record", {
 				
-				return await axios.delete(API_BASE_URL + "/delete-patient-record", {
-					
-					params: {
-						id_patient: parseInt(id_patient)
-					},
-					
-					headers: {
-					    Authorization: `Bearer ${token}`
-	  			    }
-				});
+				params: {
+					id_patient: parseInt(id_patient)
+				},
 				
-			} catch (error) {
-				
-				console.log("The error in deleting a patient record is: ", error);
-			}
-		},
+				headers: {
+				    Authorization: `Bearer ${token}`
+  			    }
+			});
+			
+		} catch (error) {
+			
+			console.log("The error in deleting a patient record is: ", error);
+		}
+	},
 	
 	async createPatientRecord(formData) {
 			
@@ -587,6 +587,78 @@ const apiService = {
 			console.log("The error in creating a patient record is: ", error)
 		}
 	},
+	
+	// this function is going to retreive the collection of vital signs from the database
+	
+	// there is a point that they need to be per patient to be useful than just a giant dump table
+	
+	async getVitalSigns() {
+		
+		try {
+			
+			return await axios.get("/get-vital-signs-records")
+			
+		} catch (error) {
+			
+			console.log("The error in retrieving data about vital signs is: ", error);
+		}
+	},
+	
+	// this functions is going to delete a vital signs record
+	
+	async deleteVitalSignsRecord(id_vitals) {
+		
+		const token = localStorage.getItem("token");
+		
+		try {
+			
+			return await axios.delete("/delete-vital-signs-record"			, {
+								
+				params: {
+					id_vitals: parseInt(id_vitals)
+				},
+				
+				headers: {
+				    Authorization: `Bearer ${token}`
+  			    }
+			});
+			
+		} catch (error) {
+			
+			console.log("The error in deleting a vital signs record is: ", error);
+		}
+		
+	},
+	
+	// this functions is going to edit a vital signs record
+	
+	async editVitalSignsRecord(formData) {
+		
+		try {
+			
+			/*
+			return await axios.put(`${API_BASE_URL}/update-patient-record`, formData, {
+			  headers: { Authorization: `Bearer ${token}` },
+			  params: { id_patient: formData.id_patient }
+			});
+			*/
+			
+			return await axios.update(`${API_BASE_URL}/edit-vital-signs-record`, formData, {
+				eaders: { Authorization: `Bearer ${token}` },
+				params: { id_vitals: formData.id_vitals}
+			})
+			
+		} catch (error) {
+			
+			console.log("The error in ")
+		}
+	},
+	
+	// this function is going to create a new vital signs record
+	
+	
+	
+	
 }
 
 export default apiService;
