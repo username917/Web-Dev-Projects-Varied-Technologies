@@ -13,44 +13,44 @@ public class VitalSigns {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idVitals")
-	private int idVitals;
+	@Column(name = "id_vitals")
+	private Integer id_vitals;
 	
-	@Column(name = "idVisit")
-	private int idVisit;
+	@Column(name = "id_visit")
+	private Integer id_visit;
 	
 	@Column(name = "temperature")
 	private double temperatute;
 	
-	@Column(name = "bloodPressure")
-	private String bloodPressure;
+	@Column(name = "blood_pressure")
+	private String blood_pressure;
 	
-	@Column(name = "heartRate")
-	private int heartRate;
+	@Column(name = "heart_rate")
+	private Integer heart_rate;
 	
-	@Column(name = "respiratoryRate")
-	private int respiratoryRate;
+	@Column(name = "respiratory_rate")
+	private Integer respirator_rate;
 	
 	@Column(name = "weight")
-	private int weight;
+	private Integer weight;
 	
 	@Column(name = "height")
-	private int height;
+	private Integer height;
 
-	public int getIdVitals() {
-		return idVitals;
+	public Integer getId_vitals() {
+		return id_vitals;
 	}
 
-	public void setIdVitals(int idVitals) {
-		this.idVitals = idVitals;
+	public void setId_vitals(Integer id_vitals) {
+		this.id_vitals = id_vitals;
 	}
 
-	public int getIdVisit() {
-		return idVisit;
+	public Integer getId_visit() {
+		return id_visit;
 	}
 
-	public void setIdVisit(int idVisit) {
-		this.idVisit = idVisit;
+	public void setId_visit(Integer id_visit) {
+		this.id_visit = id_visit;
 	}
 
 	public double getTemperatute() {
@@ -61,71 +61,69 @@ public class VitalSigns {
 		this.temperatute = temperatute;
 	}
 
-	public String getBloodPressure() {
-		return bloodPressure;
+	public String getBlood_pressure() {
+		return blood_pressure;
 	}
 
-	public void setBloodPressure(String bloodPressure) {
-		this.bloodPressure = bloodPressure;
+	public void setBlood_pressure(String blood_pressure) {
+		this.blood_pressure = blood_pressure;
 	}
 
-	public int getHeartRate() {
-		return heartRate;
+	public Integer getHeart_rate() {
+		return heart_rate;
 	}
 
-	public void setHeartRate(int heartRate) {
-		this.heartRate = heartRate;
+	public void setHeart_rate(Integer heart_rate) {
+		this.heart_rate = heart_rate;
 	}
 
-	public int getRespiratoryRate() {
-		return respiratoryRate;
+	public Integer getRespirator_rate() {
+		return respirator_rate;
 	}
 
-	public void setRespiratoryRate(int respiratoryRate) {
-		this.respiratoryRate = respiratoryRate;
+	public void setRespirator_rate(Integer respirator_rate) {
+		this.respirator_rate = respirator_rate;
 	}
 
-	public int getWeight() {
+	public Integer getWeight() {
 		return weight;
 	}
 
-	public void setWeight(int weight) {
+	public void setWeight(Integer weight) {
 		this.weight = weight;
 	}
 
-	public int getHeight() {
+	public Integer getHeight() {
 		return height;
 	}
 
-	public void setHeight(int height) {
+	public void setHeight(Integer height) {
 		this.height = height;
-	}
-
-	public VitalSigns(int idVitals, int idVisit, double temperatute, String bloodPressure, int heartRate,
-			int respiratoryRate, int weight, int height) {
-		super();
-		this.idVitals = idVitals;
-		this.idVisit = idVisit;
-		this.temperatute = temperatute;
-		this.bloodPressure = bloodPressure;
-		this.heartRate = heartRate;
-		this.respiratoryRate = respiratoryRate;
-		this.weight = weight;
-		this.height = height;
-	}
-
-	public VitalSigns() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public String toString() {
-		return "VitalSigns [idVitals=" + idVitals + ", idVisit=" + idVisit + ", temperatute=" + temperatute
-				+ ", bloodPressure=" + bloodPressure + ", heartRate=" + heartRate + ", respiratoryRate="
-				+ respiratoryRate + ", weight=" + weight + ", height=" + height + "]";
+		return "VitalSigns [id_vitals=" + id_vitals + ", id_visit=" + id_visit + ", temperatute=" + temperatute
+				+ ", blood_pressure=" + blood_pressure + ", heart_rate=" + heart_rate + ", respirator_rate="
+				+ respirator_rate + ", weight=" + weight + ", height=" + height + "]";
 	}
-	
-	
-	
+
+	private VitalSigns(Integer id_vitals, Integer id_visit, double temperatute, String blood_pressure, Integer heart_rate,
+			Integer respirator_rate, Integer weight, Integer height) {
+		super();
+		this.id_vitals = id_vitals;
+		this.id_visit = id_visit;
+		this.temperatute = temperatute;
+		this.blood_pressure = blood_pressure;
+		this.heart_rate = heart_rate;
+		this.respirator_rate = respirator_rate;
+		this.weight = weight;
+		this.height = height;
+	}
+
+	private VitalSigns() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 }

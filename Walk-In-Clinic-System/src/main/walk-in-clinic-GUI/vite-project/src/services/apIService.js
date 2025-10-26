@@ -656,8 +656,25 @@ const apiService = {
 	
 	// this function is going to create a new vital signs record
 	
+	async createVitalSignsRecord(formData) {
+		
+		try {
+			
+			return await axios.post(API_BASE_URL + "/create-vital-signs-record", formData, {
+							
+				headers: {
+				    Authorization: `Bearer ${token}`
+			    }
+				
+			});
+			
+		} catch (error) {
+			
+			console.log("The error in creating a vital signs record is: ", error);
+		}
+	}
 	
-	
+
 	
 }
 
