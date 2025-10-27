@@ -596,7 +596,7 @@ const apiService = {
 		
 		try {
 			
-			return await axios.get("/get-vital-signs-records")
+			return await axios.get(API_BASE_URL + "/get-vital-signs-records")
 			
 		} catch (error) {
 			
@@ -612,7 +612,7 @@ const apiService = {
 		
 		try {
 			
-			return await axios.delete("/delete-vital-signs-record"			, {
+			return await axios.delete(API_BASE_URL + "/delete-vital-signs-record"			, {
 								
 				params: {
 					id_vitals: parseInt(id_vitals)

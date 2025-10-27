@@ -49,7 +49,7 @@ public class PrescriptionController {
 		
 		if (deleted) {
 			
-			return ResponseEntity.ok("PRescription has been deleted");
+			return ResponseEntity.ok("Prescription has been deleted");
 		
 		} else {
 			
