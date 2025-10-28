@@ -11,11 +11,11 @@ import HealthRecords from "../Entities/HealthRecords.jsx";
 import LabResults from "../Entities/LabResults.jsx";
 import Patients from "../Entities/Patients.jsx";
 import Prescriptions from "../Entities/Prescriptions.jsx";
-import Reminders from "../Entities/Reminders.js";
+import Reminders from "../Entities/Reminders.jsx";
 import Roles from "../Entities/Roles.js";
 import UserManagement from "../Entities/UserManagement.js";
 import Visitors from "../Entities/Visitors.js";
-import VitalSigns from "../Entities/VitlalSigns.js";
+import VitalSigns from "../Entities/VitlalSigns.jsx";
 
 
 import { Sidebar, Menu, MenuItem } from 'react-pro-sidebar';
