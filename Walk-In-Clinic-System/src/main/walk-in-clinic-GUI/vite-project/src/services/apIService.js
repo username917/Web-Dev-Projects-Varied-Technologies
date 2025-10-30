@@ -594,9 +594,15 @@ const apiService = {
 	
 	async getVitalSigns() {
 		
+		const token = localStorage.getItem("token");
+		
 		try {
 			
-			return await axios.get(API_BASE_URL + "/get-vital-signs-records")
+			return await axios.get(API_BASE_URL + "/get-vital-signs-records"			, {
+			  headers: {
+			    Authorization: `Bearer ${token}`
+			  }
+			});
 			
 		} catch (error) {
 			
@@ -634,6 +640,8 @@ const apiService = {
 	
 	async editVitalSignsRecord(formData) {
 		
+		const token = localStorage.getItem("token");
+		
 		try {
 			
 			/*
@@ -644,7 +652,7 @@ const apiService = {
 			*/
 			
 			return await axios.update(`${API_BASE_URL}/edit-vital-signs-record`, formData, {
-				eaders: { Authorization: `Bearer ${token}` },
+				headers: { Authorization: `Bearer ${token}` },
 				params: { id_vitals: formData.id_vitals}
 			})
 			
@@ -657,6 +665,8 @@ const apiService = {
 	// this function is going to create a new vital signs record
 	
 	async createVitalSignsRecord(formData) {
+		
+		const token = localStorage.getItem("token");
 		
 		try {
 			

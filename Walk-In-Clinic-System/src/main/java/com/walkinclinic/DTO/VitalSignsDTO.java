@@ -10,6 +10,7 @@ public class VitalSignsDTO {
 	private Integer respirator_rate;
 	private Integer weight;
 	private Integer height;
+	
 	public Integer getId_vitals() {
 		return id_vitals;
 	}
@@ -58,5 +59,23 @@ public class VitalSignsDTO {
 	public void setHeight(Integer height) {
 		this.height = height;
 	}
+	private VitalSignsDTO(Integer id_vitals, Integer id_visit, double temperature, String blood_pressure,
+			Integer heart_rate, Integer respirator_rate, Integer weight, Integer height) {
+		super();
+		this.id_vitals = id_vitals;
+		this.id_visit = id_visit;
+		this.temperature = temperature;
+		this.blood_pressure = blood_pressure;
+		this.heart_rate = heart_rate;
+		this.respirator_rate = respirator_rate;
+		this.weight = weight;
+		this.height = height;
+	}
+	private VitalSignsDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 	
 }
