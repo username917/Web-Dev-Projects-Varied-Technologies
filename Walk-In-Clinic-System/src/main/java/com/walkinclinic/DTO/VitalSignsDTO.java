@@ -7,7 +7,7 @@ public class VitalSignsDTO {
 	private double temperature;
 	private String blood_pressure;
 	private Integer heart_rate;
-	private Integer respirator_rate;
+	private Integer respiratory_rate;
 	private Integer weight;
 	private Integer height;
 	
@@ -41,11 +41,11 @@ public class VitalSignsDTO {
 	public void setHeart_rate(Integer heart_rate) {
 		this.heart_rate = heart_rate;
 	}
-	public Integer getRespirator_rate() {
-		return respirator_rate;
+	public Integer getRespiratory_rate() {
+		return respiratory_rate;
 	}
-	public void setRespirator_rate(Integer respirator_rate) {
-		this.respirator_rate = respirator_rate;
+	public void setRespiratory_rate(Integer respiratory_rate) {
+		this.respiratory_rate = respiratory_rate;
 	}
 	public Integer getWeight() {
 		return weight;
@@ -60,14 +60,14 @@ public class VitalSignsDTO {
 		this.height = height;
 	}
 	private VitalSignsDTO(Integer id_vitals, Integer id_visit, double temperature, String blood_pressure,
-			Integer heart_rate, Integer respirator_rate, Integer weight, Integer height) {
+			Integer heart_rate, Integer respiratory_rate, Integer weight, Integer height) {
 		super();
 		this.id_vitals = id_vitals;
 		this.id_visit = id_visit;
 		this.temperature = temperature;
 		this.blood_pressure = blood_pressure;
 		this.heart_rate = heart_rate;
-		this.respirator_rate = respirator_rate;
+		this.respiratory_rate = respiratory_rate;
 		this.weight = weight;
 		this.height = height;
 	}

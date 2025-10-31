@@ -41,7 +41,7 @@ public class VitalSignsController {
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@DeleteMapping("/delete-vital-signs-record\"")
+	@DeleteMapping("/delete-vital-signs-record")
 	public ResponseEntity<?> deleteVitalSignsRecord(@RequestParam("id_vitals") Integer id_vitals) {
 		
 		boolean deleted = vitalSignsService.deleteVitalSignsRecord(id_vitals);

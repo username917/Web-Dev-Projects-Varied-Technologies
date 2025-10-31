@@ -20,7 +20,7 @@ public class VitalSigns {
 	private Integer id_visit;
 	
 	@Column(name = "temperature")
-	private double temperatute;
+	private double temperature;
 	
 	@Column(name = "blood_pressure")
 	private String blood_pressure;
@@ -29,7 +29,7 @@ public class VitalSigns {
 	private Integer heart_rate;
 	
 	@Column(name = "respiratory_rate")
-	private Integer respirator_rate;
+	private Integer respiratory_rate;
 	
 	@Column(name = "weight")
 	private Integer weight;
@@ -53,12 +53,12 @@ public class VitalSigns {
 		this.id_visit = id_visit;
 	}
 
-	public double getTemperatute() {
-		return temperatute;
+	public double getTemperature() {
+		return temperature;
 	}
 
-	public void setTemperatute(double temperatute) {
-		this.temperatute = temperatute;
+	public void setTemperature(double temperature) {
+		this.temperature = temperature;
 	}
 
 	public String getBlood_pressure() {
@@ -77,12 +77,12 @@ public class VitalSigns {
 		this.heart_rate = heart_rate;
 	}
 
-	public Integer getRespirator_rate() {
-		return respirator_rate;
+	public Integer getRespiratory_rate() {
+		return respiratory_rate;
 	}
 
-	public void setRespirator_rate(Integer respirator_rate) {
-		this.respirator_rate = respirator_rate;
+	public void setRespiratory_rate(Integer respiratory_rate) {
+		this.respiratory_rate = respiratory_rate;
 	}
 
 	public Integer getWeight() {
@@ -103,20 +103,20 @@ public class VitalSigns {
 
 	@Override
 	public String toString() {
-		return "VitalSigns [id_vitals=" + id_vitals + ", id_visit=" + id_visit + ", temperatute=" + temperatute
-				+ ", blood_pressure=" + blood_pressure + ", heart_rate=" + heart_rate + ", respirator_rate="
-				+ respirator_rate + ", weight=" + weight + ", height=" + height + "]";
+		return "VitalSigns [id_vitals=" + id_vitals + ", id_visit=" + id_visit + ", temperature=" + temperature
+				+ ", blood_pressure=" + blood_pressure + ", heart_rate=" + heart_rate + ", respiratory_rate="
+				+ respiratory_rate + ", weight=" + weight + ", height=" + height + "]";
 	}
 
-	private VitalSigns(Integer id_vitals, Integer id_visit, double temperatute, String blood_pressure, Integer heart_rate,
-			Integer respirator_rate, Integer weight, Integer height) {
+	private VitalSigns(Integer id_vitals, Integer id_visit, double temperature, String blood_pressure, Integer heart_rate,
+			Integer respiratory_rate, Integer weight, Integer height) {
 		super();
 		this.id_vitals = id_vitals;
 		this.id_visit = id_visit;
-		this.temperatute = temperatute;
+		this.temperature = temperature;
 		this.blood_pressure = blood_pressure;
 		this.heart_rate = heart_rate;
-		this.respirator_rate = respirator_rate;
+		this.respiratory_rate = respiratory_rate;
 		this.weight = weight;
 		this.height = height;
 	}

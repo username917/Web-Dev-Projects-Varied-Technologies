@@ -84,11 +84,11 @@ const VitalSigns = () => {
 	
 	// this function is going to handle the deleteion of a vital signs record
 	
-	const deleteVitalSignsRecord = async (id_vital_signs_record) => {
+	const deleteVitalSignsRecord = async (id_vitals) => {
 		
-		console.log("Deleting a vital signs record with: ", id_vital_signs_record);
+		console.log("Deleting a vital signs record with: ", id_vitals);
 	
-		await apiService.deleteVitalSignsRecord(id_vital_signs_record);
+		await apiService.deleteVitalSignsRecord(id_vitals);
 		
 		setVitalSigns([]);
 		readVitalSigns();
@@ -175,9 +175,10 @@ const VitalSigns = () => {
 					</tr>
 				</thead>
 				<tbody>
-				</tbody>
+				
 					{vitalSigns.map(record => (
-						<tr key={record.id_vital_sign}>
+						<tr key={record.id_vitals}>
+							<td>{record.id_vitals}</td>
 							<td>{record.id_visit}</td>
 							<td>{record.temperature}</td>
 							<td>{record.blood_pressure}</td>
@@ -194,15 +195,16 @@ const VitalSigns = () => {
 									Edit
 								</Button>
 								<Button
-									varinat="danger"
+									variant="danger"
 									size="sm"
-									onClick={() => deleteVitalSignsRecord(record)}
+									onClick={() => deleteVitalSignsRecord(record.id_vitals)}
 								>
 									Delete
 								</Button>
 							</td>
 						</tr>
 					))}
+				</tbody>
 			</Table>
 			
 			<Modal show={modalVisible} onHide={() => setModalVisible(false)}>
@@ -219,10 +221,10 @@ const VitalSigns = () => {
 							<Form.Control name="blood_pressure" value={formData.blood_pressure} onChange={handleChange} required></Form.Control>
 						<Form.Group>
 							<Form.Label>Heart Rate</Form.Label>
-							<Form.Control nae="heart_rate" value={formData.heart_rate} onChange={handleChange} required></Form.Control>
+							<Form.Control name="heart_rate" value={formData.heart_rate} onChange={handleChange} required></Form.Control>
 						</Form.Group>
 							<Form.Label>Respiratory Rate</Form.Label>
-							<Form.Control name="resp_rate" value={formData.respiratory_rate} onChange={handleChange} required></Form.Control>
+							<Form.Control name="respiratory_rate" value={formData.respiratory_rate} onChange={handleChange} required></Form.Control>
 						<Form.Group>
 							<Form.Label>Weight</Form.Label>
 							<Form.Control name="weight" value={formData.weight} onChange={handleChange} required></Form.Control>

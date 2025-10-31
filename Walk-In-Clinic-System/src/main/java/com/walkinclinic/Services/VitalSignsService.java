@@ -37,8 +37,8 @@ public class VitalSignsService {
 		existingVitalSigns.setHeart_rate(request.getHeart_rate());
 		existingVitalSigns.setHeight(request.getHeight());
 		existingVitalSigns.setId_vitals(request.getId_vitals());
-		existingVitalSigns.setRespirator_rate(request.getRespirator_rate());
-		existingVitalSigns.setTemperatute(request.getTemperature());
+		existingVitalSigns.setRespiratory_rate(request.getRespiratory_rate());
+		existingVitalSigns.setTemperature(request.getTemperature());
 		existingVitalSigns.setWeight(request.getWeight());
 		
 		return vitalSignsRepo.save(existingVitalSigns);
