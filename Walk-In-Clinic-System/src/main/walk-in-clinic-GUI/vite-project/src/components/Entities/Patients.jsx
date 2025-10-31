@@ -15,8 +15,8 @@ const Patients = () => {
 	const [modalVisible, setModalVisible] = useState(false);
 	
 	const [formData, setFormData]= useState({
+		
 		id_patient: "",
-	
 		first_name: "",
 		last_name: "",
 		date_of_birth: "",
