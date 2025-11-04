@@ -42,7 +42,7 @@ const Prescriptions = () => {
 			} else {
 				
 				console.log("No prescriptions have been found");
-				return
+				return;
 			}
 			
 		} catch (error) {

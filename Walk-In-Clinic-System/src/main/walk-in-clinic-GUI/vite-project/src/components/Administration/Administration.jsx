@@ -12,7 +12,7 @@ import LabResults from "../Entities/LabResults.jsx";
 import Patients from "../Entities/Patients.jsx";
 import Prescriptions from "../Entities/Prescriptions.jsx";
 import Reminders from "../Entities/Reminders.jsx";
-import Roles from "../Entities/Roles.js";
+import Roles from "../Entities/Roles.jsx";
 import UserManagement from "../Entities/UserManagement.js";
 import Visitors from "../Entities/Visitors.js";
 import VitalSigns from "../Entities/VitlalSigns.jsx";
