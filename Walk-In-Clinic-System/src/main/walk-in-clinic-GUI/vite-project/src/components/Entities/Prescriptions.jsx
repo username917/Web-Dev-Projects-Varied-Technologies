@@ -121,7 +121,7 @@ const Prescriptions = () => {
 		readPrescriptions();
 	}
 	
-	// this function wll handle chanigng events in the frontend element of the Prescriptio module
+	// this function wll handle changing events in the frontend element of the Prescriptio module
 	
 	const handleChange = (e) => {
 		

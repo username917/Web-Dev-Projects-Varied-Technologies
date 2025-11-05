@@ -79,6 +79,57 @@ const Roles = () => {
 		readRoleRecords();
 		
 	}
+	
+	// this function is going to handle the showing of the modal
+	
+	const handleShowAdd = () => {
+		
+		setEditingRole(null);
+		
+		setFormData({
+			roleid: '',
+			rolename: ''
+		})
+		
+		createRole();
+	}
+	
+	// this function is going ot handle the subission of a new or modified role record
+	
+	const handleSubmit = async () => {
+		
+		e.preventDefault();
+		
+		if (editingRole) {
+			
+			await apiService.editRole(formData);
+			
+		} else {
+			
+			await apiService.createRole(formData);
+		}
+		
+		setModalVisible(false);
+		readRoleRecords();
+	}
+	
+	// this function is going to handle changing events in the frontend element of the Roles odule
+	
+	const handleChange = (e) => {
+		
+		setFormData(prev => ({
+			
+			...prev,
+			[e.target.name]: e.target.value
+		}));
+	} 
+	
+	return (
+		
+		<>
+			<h3>Roles</h3>
+		</>
+	)
 		
 }
 
