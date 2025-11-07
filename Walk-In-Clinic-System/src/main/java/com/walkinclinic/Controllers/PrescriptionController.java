@@ -30,14 +30,14 @@ public class PrescriptionController {
 	@GetMapping("/get-prescriptions")
 	public ResponseEntity<List<PrescriptionDTO>> retrievePrescriptions() {
 		
-		List<PrescriptionDTO> prscriptionHistory = prescriptionService.retrievePrescriptions();
+		List<PrescriptionDTO> prescriptionHistory = prescriptionService.retrievePrescriptions();
 	
-		if (prscriptionHistory.isEmpty()) {
+		if (prescriptionHistory.isEmpty()) {
 			
 			return ResponseEntity.noContent().build();
 		}
 		
-		return ResponseEntity.ok(prscriptionHistory );
+		return ResponseEntity.ok(prescriptionHistory );
 	
 	}
 	

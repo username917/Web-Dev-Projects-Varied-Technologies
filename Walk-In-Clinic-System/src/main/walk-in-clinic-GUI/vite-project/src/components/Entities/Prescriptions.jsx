@@ -192,7 +192,7 @@ const Prescriptions = () => {
 				</tbody>
 			</Table>
 			
-			<Modal show={modalVisible} onhide={() => setModalVisible(false)}>
+			<Modal show={modalVisible} onHide={() => setModalVisible(false)}>
 				<Modal.Header closeButton>
 					<Modal.Title>{editingPrescription ? "Edit Prescription" : 'Create New Prescription'}</Modal.Title>
 				</Modal.Header>
