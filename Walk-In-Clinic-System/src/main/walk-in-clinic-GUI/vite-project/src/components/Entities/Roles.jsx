@@ -175,6 +175,10 @@ const Roles = () => {
 							<Form.Control name="rolename" value={formData.rolename} onChange={handleChange} required></Form.Control>
 						</Form.Group>
 					</Modal.Body>
+					<Modal.Footer>
+						<Button variant="primary" onClick={() => setModalVisible(false)}>Cancel</Button>
+						<Button variant="secondary" type="submit">{editingRole ? 'Update' : 'Add'}</Button>
+					</Modal.Footer>
 				</Form>
 			</Modal>
 		</>

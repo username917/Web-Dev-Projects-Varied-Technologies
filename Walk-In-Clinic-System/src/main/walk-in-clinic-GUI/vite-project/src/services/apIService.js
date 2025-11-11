@@ -658,7 +658,7 @@ const apiService = {
 			
 		} catch (error) {
 			
-			console.log("The error in ")
+			console.log("The error in updating a vital signs record is: ", error);
 		}
 	},
 	
@@ -682,8 +682,99 @@ const apiService = {
 			
 			console.log("The error in creating a vital signs record is: ", error);
 		}
-	}
+	},
 	
+	// this function is going to read role records
+	
+	async readRoleRecords() {
+		
+		const token = localStorage.getItem("token");
+				
+		try {
+			
+			return await axios.get(API_BASE_URL + "/get-roles"			, {
+			  headers: {
+			    Authorization: `Bearer ${token}`
+			  }
+			});
+			
+		} catch (error) {
+			
+			console.log("The error in retrieving data about roles is: ", error);
+		}
+	},
+	
+	// this function is going to control the creation of a role record
+	
+	async createRole(formData) {
+		
+		const token = localStorage.getItem("token");
+				
+		try {
+			
+			return await axios.post(API_BASE_URL + "/create-role", formData, {
+							
+				headers: {
+				    Authorization: `Bearer ${token}`
+			    }
+				
+			});
+			
+		} catch (error) {
+			
+			console.log("The error in creating a role record is: ", error);
+		}
+		
+	},
+	
+	
+	
+	// this function is going to update role records
+	
+	async editRole(formData) {
+		
+		const token = localStorage.getItem("token");
+				
+		try {
+			
+			return await axios.update(`${API_BASE_URL}/update-role`, formData, {
+				headers: { Authorization: `Bearer ${token}` },
+				params: { roleid: formData.roleid}
+			})
+			
+		} catch (error) {
+			
+			console.log("The error in udpating a role record is: ", error);
+		}
+		
+		
+	},
+	// this function is going to delete role records
+	
+	async deleteRole(roleid) {
+		
+		const token = localStorage.getItem("token");
+				
+		try {
+			
+			return await axios.delete(API_BASE_URL + "/delete-role"			, {
+								
+				params: {
+					roleid: parseInt(roleid)
+				},
+				
+				headers: {
+				    Authorization: `Bearer ${token}`
+  			    }
+			});
+			
+		} catch (error) {
+			
+			console.log("The error in deleting a role record is: ", error);
+		}
+		
+		
+	}
 
 	
 }
