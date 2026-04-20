@@ -73,8 +73,8 @@ public class RolesController {
 		
 		return ResponseEntity.ok(role);
 	}
-	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+		
+		@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/create-role")
 	public ResponseEntity<Role> addRole(@RequestBody Role request) {
 		

@@ -23,7 +23,7 @@ public class SecurityConfig {
     @Order(1)
     public SecurityFilterChain adminSecurityFilter(HttpSecurity http) throws Exception {
         http
-            .securityMatcher("/admin/**")
+            .securityMatcher("/admin/**") // edit
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/admin/login").permitAll()
                 .anyRequest().authenticated()
