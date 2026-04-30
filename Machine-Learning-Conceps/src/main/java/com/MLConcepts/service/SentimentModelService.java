@@ -8,11 +8,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
 import jakarta.annotation.PostConstruct;
 import weka.classifiers.bayes.NaiveBayes;
 import weka.core.Attribute;
@@ -191,6 +191,36 @@ public class SentimentModelService {
 			this.label = label;
 			this.confidence = confidence;
 		}
+	}
+	
+	public DebugResult predictWithDebug(String text) throws Exception {
+
+	    Instance instance = createPredictionInstance(text);
+
+	    double predictedClassIndex = classifier.classifyInstance(instance);
+	    double[] distribution = classifier.distributionForInstance(instance);
+
+	    String predictedLabel = trainingStructure.classAttribute().value((int) predictedClassIndex);
+	    double confidence = distribution[(int) predictedClassIndex];
+
+	    // Feature extraction again for visibility
+	    double[] featuresArray = extractFeatures(text);
+
+	    Map<String, Double> features = Map.of(
+	            "containsPositiveWord", featuresArray[0],
+	            "containsNegativeWord", featuresArray[1],
+	            "containsNeutralWord", featuresArray[2],
+	            "exclamationCount", featuresArray[3],
+	            "textLength", featuresArray[4]
+	    );
+
+	    Map<String, Double> probabilities = Map.of(
+	            "positive", distribution[0],
+	            "negative", distribution[1],
+	            "neutral", distribution[2]
+	    );
+
+	    return new DebugResult(predictedLabel, confidence, probabilities, features);
 	}
 	
 }

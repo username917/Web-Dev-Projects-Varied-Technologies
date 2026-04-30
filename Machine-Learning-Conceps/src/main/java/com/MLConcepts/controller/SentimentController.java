@@ -10,6 +10,8 @@ import com.MLConcepts.dto.PredictionRequest;
 import com.MLConcepts.dto.PredictionResponse;
 import com.MLConcepts.service.SentimentModelService;
 
+import DTO.DebugPredictionResponse;
+
 @RestController
 @RequestMapping("/api/sentiment")
 public class SentimentController {
@@ -28,6 +30,22 @@ public class SentimentController {
 		PredictionResponse response = new PredictionResponse(result.getLabel(), result.getConfidence());
 		
 		return ResponseEntity.ok(response);
+	}
+	
+	@PostMapping("/predict-debug")
+	public ResponseEntity<DebugPredictionResponse> predictDebug(
+	        @RequestBody PredictionRequest request) throws Exception {
+
+	    var result = sentimentModelService.predictWithDebug(request.getText());
+
+	    return ResponseEntity.ok(
+	            new DebugPredictionResponse(
+	                    result.getLabel(),
+	                    result.getConfidence(),
+	                    result.getProbabilities(),
+	                    result.getFeatures()
+	            )
+	    );
 	}
 
 }
